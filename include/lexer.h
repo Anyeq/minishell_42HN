@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:53:38 by asando            #+#    #+#             */
-/*   Updated: 2026/01/16 20:42:59 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 13:04:33 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ typedef struct	s_token
 	t_flag_quote	flag_quote;
 	struct s_token	*next_token;
 } t_token;
+
+//lexer_read
+int	ft_read_operator(char *input, int i, t_token **token_list);
+int	ft_read_quote(char *input, int i, t_token **token_list);
 
 #endif

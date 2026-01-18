@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:30:04 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 12:36:55 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 13:05:13 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,6 @@ int	ft_is_operator(char c)
 	if (c == '>' || c == '|' || c == '<')
 		return (42);
 	return (0);
-}
-
-//NOTE: For operator the value will be null but need to check this again later
-//NOTE: Edge case need to be check in this case for example when after 
-//operator there another stuff
-int	ft_read_operator(char *input, int i, t_token **token_list)
-{
-	if (input[i] == '>' && input[i + 1] == '>')
-	{
-		ft_add_token(token_list, ft_new_token(TOKEN_APPEND, NULL, Q_NONE));
-		return (i + 2);
-	}
-	else if (input[i] == '<' && input[i + 1] == '<')
-	{
-		ft_add_token(token_list, ft_new_token(TOKEN_HEREDOC, NULL, Q_NONE));
-		return (i + 2);
-	}
-	else if (input[i] == '>')
-		ft_add_token(token_list, ft_new_token(TOKEN_REDIR_IN, NULL, Q_NONE));
-	else if (input[i] == '<')
-		ft_add_token(token_list, ft_new_token(TOKEN_REDIR_OUT, NULL, Q_NONE));
-	else if (input[i] == '|')
-		ft_add_token(token_list, ft_new_token(TOKEN_PIPE, NULL, Q_NONE));
-	return (i + 1);
 }
 
 t_token	*lexer(char *input)
