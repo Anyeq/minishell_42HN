@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:53:38 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 13:04:33 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 14:37:44 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,14 @@ typedef struct	s_token
 //lexer_read
 int	ft_read_operator(char *input, int i, t_token **token_list);
 int	ft_read_quote(char *input, int i, t_token **token_list);
+int	ft_read_word(char *input, int i, t_token **token_list);
 
+//lexer_utils
+int	ft_is_whitespace(char c);
+int	ft_is_operator(char c);
+int	ft_is_quote(char c);
+
+//lexer_tokenizer
+t_token	*ft_new_token(t_token_type type, char *value, t_flag_quote quote);
+void	ft_add_token(t_token **token_list, t_token *new_token);
 #endif
