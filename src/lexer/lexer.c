@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:30:04 by asando            #+#    #+#             */
-/*   Updated: 2026/01/16 21:17:31 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 12:36:55 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,64 @@ void	ft_add_token(t_token **token_list, t_token *new_token)
 		tmp = tmp->next;
 	tmp->next = new_toke;
 	return ;
+}
+
+int	ft_is_whitespace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n')
+		return (42);
+	return (0);
+}
+
+int	ft_is_operator(char c)
+{
+	if (c == '>' || c == '|' || c == '<')
+		return (42);
+	return (0);
+}
+
+//NOTE: For operator the value will be null but need to check this again later
+//NOTE: Edge case need to be check in this case for example when after 
+//operator there another stuff
+int	ft_read_operator(char *input, int i, t_token **token_list)
+{
+	if (input[i] == '>' && input[i + 1] == '>')
+	{
+		ft_add_token(token_list, ft_new_token(TOKEN_APPEND, NULL, Q_NONE));
+		return (i + 2);
+	}
+	else if (input[i] == '<' && input[i + 1] == '<')
+	{
+		ft_add_token(token_list, ft_new_token(TOKEN_HEREDOC, NULL, Q_NONE));
+		return (i + 2);
+	}
+	else if (input[i] == '>')
+		ft_add_token(token_list, ft_new_token(TOKEN_REDIR_IN, NULL, Q_NONE));
+	else if (input[i] == '<')
+		ft_add_token(token_list, ft_new_token(TOKEN_REDIR_OUT, NULL, Q_NONE));
+	else if (input[i] == '|')
+		ft_add_token(token_list, ft_new_token(TOKEN_PIPE, NULL, Q_NONE));
+	return (i + 1);
+}
+
+t_token	*lexer(char *input)
+{
+	t_token	*token_list;
+	int		i;
+
+	i = 0;
+	token_list = NULL;
+	while (input[i])
+	{
+		while (ft_is_whitespace(input[i]))
+			i++;
+		if (input[i] == '\0')
+			break ;
+		if (ft_is_operator(input[i]))
+		{
+			i = ft_read_operator(input, i, &token_list);
+			continue ;
+		}
+	}
+	return (token_list);
 }
