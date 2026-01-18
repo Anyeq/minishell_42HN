@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:30:04 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 14:37:55 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 14:58:15 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_token	*lexer(char *input)
 			n_content = ft_read_quote(input, i, &token_list);
 			if (n_content == -1)
 			{
-				//NOTE: Handle Error here
+				ft_lexer_error();
+				ft_free_token_list(&token_list);
 				return (NULL)
 			}
 			i = n_content;

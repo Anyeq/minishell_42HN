@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:46:20 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 14:34:02 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 15:16:05 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //NOTE: For operator the value will be null but need to check this again later
 //NOTE: Edge case need to be check in this case for example when after 
 //operator there another stuff
+//BUG: Should handle if ft_new_token return NULL
 int	ft_read_operator(char *input, int i, t_token **token_list)
 {
 	if (input[i] == '>' && input[i + 1] == '>')
@@ -52,10 +53,7 @@ int	ft_read_quote(char *input, int i, t_token **token_list)
 	while (input[i] && !ft_is_quote(input[i]))
 		i++;
 	if (input[i] == '\0')
-	{
-		//NOTE: must handle Error!
 		return (-1);
-	}
 	value = ft_substr(input, start, i - start);
 	ft_add_token(token_list, ft_new_token(TOKEN_WORD, value, quote));
 	return (i + 1);
