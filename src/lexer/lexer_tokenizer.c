@@ -6,14 +6,12 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 14:36:27 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 14:54:39 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 18:11:08 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-//NOTE: check again if allocation fail should we return NULL or exit?
-//NOTE: value should be dynamically alocated probaby
 t_token	*ft_new_token(t_token_type type, char *value, t_flag_quote quote)
 {
 	t_token	*new_token;
@@ -28,7 +26,6 @@ t_token	*ft_new_token(t_token_type type, char *value, t_flag_quote quote)
 	return (new_token);
 }
 
-//NOTE: what should we do if new_token is NULL
 void	ft_add_token(t_token **token_list, t_token *new_token)
 {
 	t_token	*tmp;

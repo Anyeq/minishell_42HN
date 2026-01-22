@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:53:38 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 15:12:25 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/18 18:12:15 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum	e_token_type
 	TOKEN_REDIR_OUT,
 	TOKEN_APPEND,
 	TOKEN_HEREDOC,
-	TOKEN_EOF
+	TOKEN_EOF,
+	TOKEN_NONE
 } t_token_type;
 
 typedef enum	e_flag_quote
@@ -42,18 +43,27 @@ typedef struct	s_token
 	struct s_token	*next_token;
 } t_token;
 
+typedef enum	e_flag_error
+{
+	ERR_MALLOC,
+	ERR_SYNTAX_UNCLOSED
+} t_flag_error;
+
 //lexer_read
-int	ft_read_operator(char *input, int i, t_token **token_list);
-int	ft_read_quote(char *input, int i, t_token **token_list);
-int	ft_read_word(char *input, int i, t_token **token_list);
+int		ft_read_operator(char *input, int i, t_token **token_list);
+int		ft_read_quote(char *input, int i, t_token **token_list);
+int		ft_read_word(char *input, int i, t_token **token_list);
 
 //lexer_utils
 int		ft_is_whitespace(char c);
 int		ft_is_operator(char c);
 int		ft_is_quote(char c);
-void	ft_lexer_error(void)
+void	ft_lexer_error(t_flag_error f_error);
 
 //lexer_tokenizer
 t_token	*ft_new_token(t_token_type type, char *value, t_flag_quote quote);
 void	ft_add_token(t_token **token_list, t_token *new_token);
+
+//lexer
+t_token	*lexer_loop(char *input);
 #endif
