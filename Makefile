@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/01/23 21:38:53 by asando           ###   ########.fr        #
+#    Updated: 2026/01/24 19:44:18 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ BONUS ?= 0
 HEADER := include
 LIBFT_DIR := ./lib/libft
 LIBFT_HEADER := $(LIBFT_DIR)/includes
+LIBFT := $(LIBFT_DIR)/libft.a
 CFLAGS := -Wall -Wextra -Werror -I$(HEADER) -I$(LIBFT_HEADER)
 
 #==============================================================================
@@ -39,13 +40,6 @@ OBJ_LEXER_DIR := $(OBJ_DIR)/lexer_obj
 
 OBJ_FILE_LEXER := $(SRC_FILE_LEXER:$(SRC_LEXER_DIR)/%.c=$(OBJ_LEXER_DIR)/%.o)
 OBJS := $(OBJ_FILE_LEXER)
-
-#==============================================================================
-# TEST FILES
-#==============================================================================
-TEST_DIR := ./tester
-
-LIBFT := $(LIBFT_DIR)/libft.a
 
 #==============================================================================
 # RULES
