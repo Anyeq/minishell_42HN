@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:46:20 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 19:25:59 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/24 11:58:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	ft_read_operator(char *input, int i, t_token **token_list)
 	return (-1);
 }
 
+//NOTE: check if value and new token should be nulled at the beginning
 int	ft_read_quote(char *input, int i, t_token **token_list)
 {
 	t_flag_quote	quote;
@@ -64,13 +65,12 @@ int	ft_read_quote(char *input, int i, t_token **token_list)
 	char			*value;
 	t_token			*new_token;
 
-	new_token = NULL;
-	value = NULL;
 	start = i + 1;
 	if (input[i] == '\'')
 		quote = Q_SINGLE;
 	else if (input[i] == '"')
 		quote = Q_DOUBLE;
+	i++;
 	while (input[i] && !ft_is_quote(input[i]))
 		i++;
 	if (input[i] == '\0')
@@ -96,7 +96,7 @@ int	ft_read_word(char *input, int i, t_token **token_list)
 	value = NULL;
 	start = i;
 	while (!ft_is_whitespace(input[i]) && !ft_is_operator(input[i])
-		&& !ft_is_quote(input[i]))
+		&& !ft_is_quote(input[i]) && input[i])
 		i++;
 	value = ft_substr(input, start, i - start);
 	new_token = ft_new_token(TOKEN_WORD, value, Q_NONE);

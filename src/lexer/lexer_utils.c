@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 14:29:43 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 16:58:20 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/24 12:09:30 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	ft_is_quote(char c)
 void	ft_lexer_error(t_flag_error f_error)
 {
 	if (f_error & ERR_MALLOC)
-		printf("minishell: failed malloc");
+		printf("minishell: failed malloc\n");
 	else if (f_error & ERR_SYNTAX_UNCLOSED)
-		printf("minishell: syntax error: unclosed quote");
+		printf("minishell: syntax error: unclosed quote\n");
 	return ;
 }
 

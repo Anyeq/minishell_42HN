@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 14:36:27 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 18:11:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/24 12:00:53 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	ft_add_token(t_token **token_list, t_token *new_token)
 		return ;
 	}
 	tmp = *token_list;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new_token;
+	while (tmp->next_token)
+		tmp = tmp->next_token;
+	tmp->next_token = new_token;
 	return ;
 }
 
@@ -54,7 +54,7 @@ void	ft_free_token_list(t_token **token_list)
 	while (tmp)
 	{
 		to_del = tmp;
-		tmp = tmp->next;
+		tmp = tmp->next_token;
 		free(to_del->value);
 		free(to_del);
 	}

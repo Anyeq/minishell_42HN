@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:30:04 by asando            #+#    #+#             */
-/*   Updated: 2026/01/18 19:25:58 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/24 12:09:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_token	*lexer_loop(char *input)
 		if (input[i] == '\0')
 			break ;
 		i = ft_lexer_read(input, i, &token_list);
+		if (i < 0)
+			return (NULL);
 	}
 	return (token_list);
 }
