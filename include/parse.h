@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:02:27 by asando            #+#    #+#             */
-/*   Updated: 2026/01/25 13:16:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/28 17:53:49 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "libft.h"
 #include "lexer.h"
+#include <stdlib.h>
 
 typedef struct	s_redir
 {
@@ -25,10 +26,23 @@ typedef struct	s_redir
 
 typedef struct	s_cmd
 {
-	char			**argv;
+	char			**args;
 	t_redir			*redirs;
 	struct s_cmd	*next_cmd;
 
 }	t_cmd;
+
+//Structure Modification
+t_cmd	*ft_new_cmd(void);
+t_redir	*ft_new_redir(t_token_type type, char *filename);
+void	ft_add_arg(t_cmd *cmd, char *value);
+void	ft_add_redir(t_cmd *cmd, t_token_type type, char *filename);
+void	ft_add_cmd(t_cmd **pipeline, t_cmd *new_cmd);
+
+//Data free allocation function
+void	ft_free_args(char **args);
+void	ft_free_redirs(t_redir *redirs);
+void	ft_free_cmd(t_cmd *cmd);
+void	ft_free_pipeline(t_cmd *cmd);
 
 #endif
