@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 13:15:15 by asando            #+#    #+#             */
-/*   Updated: 2026/01/28 17:54:03 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/28 21:06:31 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_add_arg(t_cmd *cmd, char *value)
 	}
 	new_arg[i] = value;
 	new_arg[i + 1] = NULL;
-	//BUG: Free the cmd->args
+	ft_free_args(cmd->args);
 	cmd->args = new_arg;
 	return ;
 }
@@ -101,4 +101,19 @@ void	ft_add_cmd(t_cmd **pipeline, t_cmd *new_cmd)
 		tmp = tmp->next_cmd;
 	tmp->next_cmd = new_cmd;
 	return ;
+}
+
+t_cmd	*parse_loop(t_token *tokens)
+{
+	t_cmd	*pipeline;
+	t_cmd	*curr_cmd;
+
+	curr_cmd = NULL;
+	while (tokens)
+	{
+		if (curr_cmd == NULL)
+			curr_cmd = ft_new_cmd();
+		
+	}
+	return (pipeline);
 }
