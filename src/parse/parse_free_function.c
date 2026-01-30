@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:34:05 by asando            #+#    #+#             */
-/*   Updated: 2026/01/28 17:53:33 by asando           ###   ########.fr       */
+/*   Updated: 2026/01/30 20:45:31 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_free_args(char **args)
 	to_del = tmp;
 	while (tmp)
 	{
-		tmp = *args++;
+		tmp++;
 		free(to_del);
 		to_del = tmp;
 	}
@@ -29,12 +29,12 @@ void	ft_free_args(char **args)
 	return ;
 }
 
-void	ft_free_redirs(t_redir *redirs)
+void	ft_free_redirs(t_redir **redirs)
 {
 	t_redir	*tmp;
 	t_redir	*to_del;
 
-	tmp = redirs;
+	tmp = *redirs;
 	to_del = tmp;
 	while (tmp)
 	{
@@ -42,23 +42,23 @@ void	ft_free_redirs(t_redir *redirs)
 		free(to_del);
 		to_del = tmp;
 	}
-	redirs = NULL;
+	*redirs = NULL;
 	return ;
 }
 
 void	ft_free_cmd(t_cmd *cmd)
 {
 	ft_free_args(cmd->args);
-	ft_free_redirs(cmd->redirs);
+	ft_free_redirs(&cmd->redirs);
 	return ;
 }
 
-void	ft_free_pipeline(t_cmd *cmd)
+void	ft_free_pipeline(t_cmd **cmd)
 {
 	t_cmd	*tmp;
 	t_cmd	*to_del;
 
-	tmp = cmd;
+	tmp = *cmd;
 	to_del = tmp;
 	while (tmp)
 	{
@@ -67,6 +67,6 @@ void	ft_free_pipeline(t_cmd *cmd)
 		free(to_del);
 		to_del = tmp;
 	}
-	cmd = NULL;
+	*cmd = NULL;
 	return ;
 }
