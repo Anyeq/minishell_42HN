@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:46:20 by asando            #+#    #+#             */
-/*   Updated: 2026/01/24 11:58:40 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/01 19:24:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ static t_token_type	ft_read_token_type(char *input, int i)
 		return (TOKEN_REDIR_OUT);
 	else if (input[i] == '|')
 		return (TOKEN_PIPE);
-	return (TOKEN_NONE);
+	return (TOKEN_WORD);
 }
 
-//NOTE: For operator the value will be null but need to check this again later
-//NOTE: Edge case need to be check in this case for example when after 
-//operator there another stuff
 int	ft_read_operator(char *input, int i, t_token **token_list)
 {
 	t_token			*new_token;

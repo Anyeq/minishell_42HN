@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:34:05 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 15:15:47 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/01 17:02:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 void	ft_free_args(char **args)
 {
-	char	*tmp;
-	char	*to_del;
+	int		i;
 
-	tmp = *args;
-	to_del = tmp;
-	while (tmp)
+	i = 0;
+	if (args == NULL)
+		return ;
+	while (args[i])
 	{
-		tmp++;
-		free(to_del);
-		to_del = tmp;
+		free(args[i]);
+		i++;
 	}
-	*args = NULL;
+	free(args);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 13:15:15 by asando            #+#    #+#             */
-/*   Updated: 2026/01/31 20:32:53 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/01 19:33:46 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ t_redir	*ft_new_redir(t_token_type type, char *filename)
 	if (new_redir == NULL)
 		return (NULL);
 	new_redir->type = type;
-	new_redir->filename = filename;
+	new_redir->filename = ft_strdup(filename);
 	new_redir->next_redir = NULL;
 	return (new_redir);
 }
 
+//NOTE: consider to clean value
 int	ft_add_arg(t_cmd *cmd, char *value)
 {
 	int		count;
@@ -54,12 +55,12 @@ int	ft_add_arg(t_cmd *cmd, char *value)
 	new_arg = malloc(sizeof(char *) * (count + 2));
 	if (new_arg == NULL)
 		return (-1);
-	while (cmd->args[i])
+	while (cmd->args && cmd->args[i])
 	{
-		new_arg[i] = cmd->args[i];
+		new_arg[i] = ft_strdup(cmd->args[i]);
 		i++;
 	}
-	new_arg[i] = value;
+	new_arg[i] = ft_strdup(value);
 	new_arg[i + 1] = NULL;
 	ft_free_args(cmd->args);
 	cmd->args = new_arg;
