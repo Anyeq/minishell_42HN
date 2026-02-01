@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 19:54:38 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 20:02:16 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/01 20:10:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static int	ft_token_to_cmd(t_cmd **curr_cmd, t_cmd **pipeline,
 	return (0);
 }
 
-//BUG: When it return NULL than we have to handle memorry allocation for token
 t_cmd	*parse_loop(t_token *tokens)
 {
 	t_cmd	*pipeline;

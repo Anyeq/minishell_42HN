@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/02/01 18:58:04 by asando           ###   ########.fr        #
+#    Updated: 2026/02/01 20:14:08 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC_PARSE_DIR := $(SRC_DIR)/parse
 FILE_LEXER := lexer.c lexer_read.c lexer_tokenizer.c lexer_utils.c
 SRC_FILE_LEXER := $(addprefix $(SRC_LEXER_DIR)/, $(FILE_LEXER))
 
-FILE_PARSE := parse.c parse_cmd.c parse_free_function.c
+FILE_PARSE := parse.c parse_cmd.c parse_free_function.c parse_utils.c
 SRC_FILE_PARSE := $(addprefix $(SRC_PARSE_DIR)/, $(FILE_PARSE))
 
 SRCS := $(SRC_FILE_LEXER) $(SRC_FILE_PARSE)

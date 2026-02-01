@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 13:15:15 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 19:33:46 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/01 20:10:30 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_redir	*ft_new_redir(t_token_type type, char *filename)
 	return (new_redir);
 }
 
-//NOTE: consider to clean value
 int	ft_add_arg(t_cmd *cmd, char *value)
 {
 	int		count;

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:02:27 by asando            #+#    #+#             */
-/*   Updated: 2026/01/31 20:41:21 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/01 20:13:43 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	ft_free_args(char **args);
 void	ft_free_redirs(t_redir **redirs);
 void	ft_free_cmd(t_cmd *cmd);
 void	ft_free_pipeline(t_cmd **cmd);
+
+//Parse Utils --> parse_utils.c
+void	ft_parse_error(t_cmd **pipeline);
 
 //Parse loop
 t_cmd	*parse_loop(t_token *tokens);
