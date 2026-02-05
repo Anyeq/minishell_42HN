@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:02:27 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 20:13:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/05 13:59:29 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_redir
 {
 	t_token_type	type;
 	char			*filename;
+	int				fd;
 	struct s_redir	*next_redir;
 }	t_redir;
 

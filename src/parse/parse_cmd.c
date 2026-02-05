@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 13:15:15 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 20:10:30 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/05 14:02:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_redir	*ft_new_redir(t_token_type type, char *filename)
 		return (NULL);
 	new_redir->type = type;
 	new_redir->filename = ft_strdup(filename);
+	new_redir->fd = -1;
 	new_redir->next_redir = NULL;
 	return (new_redir);
 }
