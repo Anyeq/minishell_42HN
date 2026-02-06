@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/06 19:14:30 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/06 19:24:04 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 		n++;
 	}
 	ft_redirection_function(cmd->redirs);
-	//NOTE: here should be execution of buildint
+	if (ft_is_buildint(cmd->args[0]))
+	{
+		ft_run_buildint(cmd->args[0]);
+		exit(0);
+	}
 	//NOTE: here should be execution of external program
 	//NOTE: with EXECVE
 	//NOTE: if EXECVE failed return exit(1)
