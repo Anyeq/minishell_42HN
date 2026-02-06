@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/06 19:06:53 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/06 19:14:30 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //NOTE: Protect all dup
 //NOTE: if ft_redirection can be failed
-void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
+static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 {
 	int	n;
 

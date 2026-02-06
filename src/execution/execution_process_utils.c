@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_process.c                                :+:      :+:    :+:   */
+/*   execution_process_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:25:06 by asando            #+#    #+#             */
-/*   Updated: 2026/02/06 19:08:57 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/06 19:12:59 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_cmd_count(t_cmd *cmd)
 	return (res);
 }
 
-void	ft_clean_pipe_allocation(int n, int **address)
+static void	ft_clean_pipe_allocation(int n, int **address)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	ft_clean_pipe_allocation(int n, int **address)
 	return ;
 }
 
-void	ft_close_pipes(int n, int **pipes)
+static void	ft_close_pipes(int n, int **pipes)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ void	ft_close_pipes(int n, int **pipes)
 	return ;
 }
 
-int	**ft_allocate_pipes(int n_cmd)
+static int	**ft_allocate_pipes(int n_cmd)
 {
 	int	**pipes;
 	int	i;
