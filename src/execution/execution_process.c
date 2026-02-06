@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:25:06 by asando            #+#    #+#             */
-/*   Updated: 2026/02/06 19:07:13 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/06 19:08:57 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_cmd_count(t_cmd *cmd)
 	return (res);
 }
 
-void	ft_clean_allocation(int n, int **address)
+void	ft_clean_pipe_allocation(int n, int **address)
 {
 	int	i;
 
@@ -69,7 +69,7 @@ int	**ft_allocate_pipes(int n_cmd)
 		if (pipes[i] == NULL)
 		{
 			perror("malloc error");
-			ft_clean_allocation(i, pipes);
+			ft_clean_pipe_allocation(i, pipes);
 			free(pipes);
 			return (NULL);
 		}
@@ -95,7 +95,7 @@ int	**ft_create_pipe(int n_cmd)
 		{
 			perror("pipe error");
 			ft_close_pipes(i, pipes);
-			ft_clean_allocation(i, pipes);
+			ft_clean_pipe_allocation(i, pipes);
 			free(pipes);
 			return (NULL);
 		}
