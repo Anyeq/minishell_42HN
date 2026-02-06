@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/06 19:24:04 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/06 19:28:49 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 	//NOTE: if EXECVE failed return exit(1)
 }
 
-//NOTE: check if after exit memory is cleaned
 void	ft_run_child_process(t_cmd *cmd, int n_cmd, int *pids, int **pipes)
 {
 	int		i;
