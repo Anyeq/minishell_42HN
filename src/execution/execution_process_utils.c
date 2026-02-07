@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:25:06 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 11:29:39 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/07 19:01:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_cmd_count(t_cmd *cmd)
 	return (res);
 }
 
-static void	ft_clean_pipe_allocation(int n, int **address)
+void	ft_clean_pipe_allocation(int n, int **address)
 {
 	int	i;
 
@@ -38,11 +38,13 @@ static void	ft_clean_pipe_allocation(int n, int **address)
 	return ;
 }
 
-static void	ft_close_pipes(int n, int **pipes)
+void	ft_close_pipes(int n, int **pipes)
 {
 	int	i;
 
 	i = 0;
+	if (pipes == NULL)
+		return ;
 	while (i < n)
 	{
 		close(pipes[i]);

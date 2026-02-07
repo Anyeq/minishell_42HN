@@ -6,14 +6,14 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:35:13 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 12:22:00 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/07 19:11:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
 // OPTIMIZE: Potentially unused one out of two int variable
-int	ft_wait_childrenn_process(pid_t *pids, int n_cmd)
+static int	ft_wait_children_process(pid_t *pids, int n_cmd)
 {
 	int	status;
 	int	last_process_status;
@@ -30,7 +30,7 @@ int	ft_wait_childrenn_process(pid_t *pids, int n_cmd)
 	return (last_process_Status);
 }
 
-int	fd_get_exit_status(int exit_status)
+static int	ft_get_exit_status(int exit_status)
 {
 	if (WIFEXITED(exit_status))
 		return (WEXITSTATUS(exit_status));
@@ -44,19 +44,9 @@ int	ft_parent_process(int **pipes, pid_t *pids, int	n_cmd)
 	int	status;
 	int exit_code;
 
-
-}
-
-void	ft_executor(t_cmd *pipeline)
-{
-	int		n_cmd;
-	int		**pipes;
-	pid_t	*pids;
-
-	n_cmd = ft_cmd_count(pipeline);
-	pipes = ft_create_pipe(n_cmd);
-	ft_run_child_process(pipeline, n_cmd, pids, pipes);
-	// TODO: build a closing pipe for parent HERE
-	ft_parent_process(pipes, pids, n_cmd);
-	// TODO: free allocation pipes and pids here
+	ft_close_pipes(n_cmd - 1, pipes);
+	status = ft_wait_children_process(pids, n_cmd);
+	exit_code = ft_get_exit_status(status);
+	// NOTE: probably need to save exit_code as global
+	return (exit_code);
 }
