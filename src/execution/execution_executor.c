@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 19:11:23 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/07 19:46:03 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ void	ft_executor(t_cmd *pipeline)
 
 	n_cmd = ft_cmd_count(pipeline);
 	pids = malloc(sizeof(pid_t) * n_cmd);
+	pipes = NULL;
 	if (pids == NULL)
 		return ;
-	pipes = ft_create_pipe(n_cmd);
-	if (pipes == NULL)
-		return ;
+	if (n_cmd > 1)
+	{
+		pipes = ft_create_pipe(n_cmd);
+		if (pipes == NULL)
+			return ;
+	}
 	ft_run_child_process(pipeline, n_cmd, pids, pipes);
 	ft_parent_process(pipes, pids, n_cmd);
 	ft_clean_pipe_allocation(n_cmd - 1, pipes);
