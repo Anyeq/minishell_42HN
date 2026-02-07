@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   execution_redirection.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:19:36 by asando            #+#    #+#             */
-/*   Updated: 2026/02/05 19:51:24 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/07 11:33:47 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //NOTE: is exit return the error of open
 //NOTE: protect duplicate
-static void	ft_redir_no_heredoc(t_token_type type)
+static void	ft_redir_no_heredoc(t_token_type type, int fd)
 {
 	if (redirs->type == TOKEN_REDIR_IN)
 	{
@@ -46,13 +46,13 @@ static void	ft_redir_no_heredoc(t_token_type type)
 //NOTE: protect duplicate
 void	ft_redirection_function(t_redir *redirs)
 {
-	int		fd;
+	int	fd;
 
 	while (redirs)
 	{
 		if (redirs->type == TOKEN_REDIR_IN || redirs->type == TOKEN_REDIR_OUT
 			|| redirs->type == TOKEN_APPEND)
-			ft_redir_no_heredoc(redirs->type);
+			ft_redir_no_heredoc(redirs->type, fd);
 		else if (redirs->type == TOKEN_HEREDOC)
 		{
 			dup2(redirs->fd, STDIN_FILENO);
