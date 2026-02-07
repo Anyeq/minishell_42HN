@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:35:13 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 12:09:05 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/07 12:22:00 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,18 @@ int	ft_parent_process(int **pipes, pid_t *pids, int	n_cmd)
 	int exit_code;
 
 
+}
+
+void	ft_executor(t_cmd *pipeline)
+{
+	int		n_cmd;
+	int		**pipes;
+	pid_t	*pids;
+
+	n_cmd = ft_cmd_count(pipeline);
+	pipes = ft_create_pipe(n_cmd);
+	ft_run_child_process(pipeline, n_cmd, pids, pipes);
+	// TODO: build a closing pipe for parent HERE
+	ft_parent_process(pipes, pids, n_cmd);
+	// TODO: free allocation pipes and pids here
 }
