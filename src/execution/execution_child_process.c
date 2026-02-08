@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 20:57:20 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/08 12:41:30 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_child_process_fail(t_cmd *cmd, int **pipes, int *pids, int i)
 	return ;
 }
 
-void	ft_create_child_process(t_cmd *cmd, int n_cmd, int *pids, int **pipes)
+int	ft_create_child_process(t_cmd *cmd, int n_cmd, int *pids, int **pipes)
 {
 	int	i;
 

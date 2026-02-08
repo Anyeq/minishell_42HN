@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:11:21 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 19:31:52 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/08 12:55:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_clean_pipe_allocation(int n, int **address);
 void	ft_close_pipes(int n, int **pipes);
 
 // Pipe Creation function (execution_pipe.c)
-int		**ft_create_pipe(int n_cmd);
+int		**ft_init_pipe(int n_cmd);
 
 // Rediraction purpose function (execution_redirection.c)
 void	ft_redirection_function(t_redir *redirs);
