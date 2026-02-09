@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/02/08 13:15:42 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/09 16:40:56 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	**ft_create_pipe(int n_cmd, t_cmd **pipeline)
 	return (pipes);
 }
 
+//TODO: add struct or add more parameter on ft_Executor to pass copy of env
 void	ft_executor(t_cmd **pipeline)
 {
 	int		n_cmd;
