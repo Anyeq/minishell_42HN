@@ -6,75 +6,11 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/09 14:50:11 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/09 15:58:42 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-char	*ft_strjoin3(char *str1, char *str2, char *str3)
-{
-	char	*tmp;
-	char	*res;
-
-	tmp = ft_strjoin(str1, str2);
-	if (tmp == NULL)
-	{
-		perror("malloc error");
-		return (NULL);
-	}
-	res = ft_strjoin(tmp, res);
-	if (res == NULL)
-		perror("malloc error");
-	free (tmp);
-	return (res);
-}
-
-void	ft_free_split(char **list_str)
-{
-	int	i;
-
-	i = 0;
-	while (list_str[i])
-	{
-		free(list_str[i]);
-		i++;
-	}
-	free(list_str);
-	return ;
-}
-
-//NOTE: paths null == clean path_env
-char	*ft_find_path(char *path)
-{
-	char	*path_env;
-	char	**paths;
-	char	*full;
-	int		i;
-
-	i = 0;
-	if (ft_strchr(path, '/'))
-		return (ft_strdup(path));
-	path_env = getenv("PATH");
-	if (path_env == NULL)
-		return (NULL);
-	paths = ft_split(path_env, ':');
-	if (paths == NULL)
-		return (NULL);
-	while (paths[i])
-	{
-		full = ft_strjoin3(paths[i], "/", path);
-		if (access(full, X_OK) == 0)
-		{
-			ft_free_split(paths);
-			return (full);
-		}
-		free(full);
-		i++;
-	}
-	ft_free_split(paths);
-	return (NULL);
-}
 
 static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 {
@@ -98,7 +34,8 @@ static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 		ft_run_buildint(cmd->args[0]);
 		exit(0);
 	}
-	execve(find_path(cmd->args[0]), );
+	// BUG: we have one parameter missing envp variable
+	execve(ft_find_path(cmd->args[0]), cmd->args, );
 	perror("execve error");
 	exit(1);
 }
