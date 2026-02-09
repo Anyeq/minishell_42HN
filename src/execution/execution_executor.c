@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/02/08 12:55:35 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/08 13:15:42 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	**ft_create_pipe(int n_cmd, t_cmd **pipeline)
 	pipes == NULL;
 	if (n_cmd > 1)
 	{
-		pipes = ft_create_pipe(n_cmd);
+		pipes = ft_init_pipe(n_cmd);
 		if (pipes == NULL)
 			ft_free_pipeline(pipeline);
 	}
@@ -34,8 +34,8 @@ void	ft_executor(t_cmd **pipeline)
 	int		fork_status;
 
 	fork_status = 0;
-	n_cmd = ft_cmd_count(*pipeline);
 	pipes = NULL;
+	n_cmd = ft_cmd_count(*pipeline);
 	pids = malloc(sizeof(pid_t) * n_cmd);
 	if (pids == NULL)
 	{

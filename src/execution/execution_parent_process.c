@@ -6,13 +6,12 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:35:13 by asando            #+#    #+#             */
-/*   Updated: 2026/02/07 19:32:50 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/08 12:59:57 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-// OPTIMIZE: Potentially unused one out of two int variable
 static int	ft_wait_children_process(pid_t *pids, int n_cmd)
 {
 	int	status;
@@ -27,7 +26,7 @@ static int	ft_wait_children_process(pid_t *pids, int n_cmd)
 			last_process_status = status;
 		i++;
 	}
-	return (last_process_Status);
+	return (last_process_status);
 }
 
 static int	ft_get_exit_status(int exit_status)

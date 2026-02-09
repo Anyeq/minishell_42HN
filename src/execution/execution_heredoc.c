@@ -6,20 +6,22 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:55:38 by asando            #+#    #+#             */
-/*   Updated: 2026/02/05 19:51:25 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/08 13:25:07 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-//NOTE: Protect write
 static void	ft_write_line(int fd, const char *line)
 {
 	size_t	line_size;
 
 	line_size = ft_strlen(line);
 	if (write(fd, line, line_size) < line_size)
+	{
 		perror("write error");
+		return ;
+	}
 	if (write(fd, "\n", 1) < 1)
 		perror("write error");
 	return ;
@@ -48,7 +50,6 @@ static int	ft_read_heredoc(const char *delimiter, int write_fd)
 	return (0);
 }
 
-//NOTE: Protect pipe
 static int	ft_single_heredoc(t_redir *redirs)
 {
 	int	pipe_fd[2];

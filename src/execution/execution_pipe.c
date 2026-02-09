@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:15:32 by asando            #+#    #+#             */
-/*   Updated: 2026/02/08 12:54:52 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/08 12:58:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	**ft_allocate_pipes(int n_cmd)
 	return (pipes);
 }
 
-//NOTE: when pipe error should close the rest
 //NOTE: when NULL should clean everything
 int	**ft_init_pipe(int n_cmd)
 {
