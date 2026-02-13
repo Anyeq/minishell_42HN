@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/02/09 16:40:56 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/13 08:40:24 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	**ft_create_pipe(int n_cmd, t_cmd **pipeline)
 }
 
 //TODO: add struct or add more parameter on ft_Executor to pass copy of env
-void	ft_executor(t_cmd **pipeline)
+void	ft_executor(t_cmd **pipeline, char **envp)
 {
 	int		n_cmd;
 	int		**pipes;
@@ -46,7 +46,7 @@ void	ft_executor(t_cmd **pipeline)
 	pipes = ft_if_multiple_cmd(n_cmd, pipeline);
 	if (pipes == NULL)
 		return ;
-	fork_status = ft_create_child_process(*pipeline, n_cmd, pids, pipes);
+	fork_status = ft_create_child_process(*pipeline, envp, pids, pipes);
 	if (fork_status == 0)
 		ft_parent_process(pipes, pids, n_cmd);
 	ft_clean_pipe_allocation(n_cmd - 1, pipes);

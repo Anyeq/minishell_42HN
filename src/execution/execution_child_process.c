@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/09 16:39:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/13 08:45:03 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 	exit(1);
 }
 
-static void	ft_child_process_fail(t_cmd *cmd, int **pipes, int *pids, int i)
+//BUG: working on eleminating n_cmd on parameter so we can put envp
+static void	ft_child_process_fail(char *cmd, int **pipes, int *pids, int i)
 {
 	int	n;
 
@@ -55,22 +56,24 @@ static void	ft_child_process_fail(t_cmd *cmd, int **pipes, int *pids, int i)
 	return ;
 }
 
-int	ft_create_child_process(t_cmd *cmd, int n_cmd, int *pids, int **pipes)
+int	ft_create_child_process(t_cmd *cmd, char **envp, int *pids, int **pipes)
 {
 	int	i;
+	int	n_cmd;
 
 	i = 0;
+	n_cmd = ft_cmd_count(cmd);
 	while (i < n_cmd)
 	{
 		pids[i] = fork();
 		if (pids[i] == -1)
 		{
 			perror("fork");
-			ft_child_process_fail(n_cmd, pipes, pids, i);
+			ft_child_process_fail(envp, pipes, pids, i);
 			return (-1) ;
 		}
 		if (pids[i] == 0)
-			ft_child_process(cmd, i, n_cmd, pipes);
+			ft_child_process(cmd, i, envp, pipes);
 		cmd = cmd->next_cmd;
 		i++;
 	}
