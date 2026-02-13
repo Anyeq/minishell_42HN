@@ -6,22 +6,22 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/13 08:45:03 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/13 11:06:15 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
+static void	ft_child_process(t_cmd *cmd, int i, t_helper *helper, int **pipes)
 {
 	int	n;
 
 	n = 0;
 	if (i > 0)
 		dup2(pipes[i - 1][0], STDIN_FILENO);
-	if (i < (n_cmd - 1))
+	if (i < (helper->n_cmd - 1))
 		dup2(pipes[i][1], STDOUT_FILENO);
-	while (n < n_cmd - 1)
+	while (n < helper->n_cmd - 1)
 	{
 		close(pipes[n][0]);
 		close(pipes[n][1]);
@@ -34,19 +34,17 @@ static void	ft_child_process(t_cmd *cmd, int i, int n_cmd, int **pipes)
 		ft_run_buildint(cmd->args[0]);
 		exit(0);
 	}
-	// BUG: one parameter missing envp variable
-	execve(ft_find_path(cmd->args[0]), cmd->args, );
+	execve(ft_find_path(cmd->args[0]), cmd->args, helper->envp);
 	perror("execve error");
 	exit(1);
 }
 
-//BUG: working on eleminating n_cmd on parameter so we can put envp
-static void	ft_child_process_fail(char *cmd, int **pipes, int *pids, int i)
+static void	ft_child_process_fail(t_helper *helper, int **pipes, int *pids, int i)
 {
 	int	n;
 
 	n = 0;
-	ft_close_pipes(n_cmd - 1, pipes);
+	ft_close_pipes(helper->n_cmd - 1, pipes);
 	while (n < i)
 	{
 		waitpid(pids[n], NULL, 0);
@@ -56,24 +54,22 @@ static void	ft_child_process_fail(char *cmd, int **pipes, int *pids, int i)
 	return ;
 }
 
-int	ft_create_child_process(t_cmd *cmd, char **envp, int *pids, int **pipes)
+int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids, int **pipes)
 {
 	int	i;
-	int	n_cmd;
 
 	i = 0;
-	n_cmd = ft_cmd_count(cmd);
-	while (i < n_cmd)
+	while (i < helper->n_cmd)
 	{
 		pids[i] = fork();
 		if (pids[i] == -1)
 		{
 			perror("fork");
-			ft_child_process_fail(envp, pipes, pids, i);
+			ft_child_process_fail(helper, pipes, pids, i);
 			return (-1) ;
 		}
 		if (pids[i] == 0)
-			ft_child_process(cmd, i, envp, pipes);
+			ft_child_process(cmd, i, helper, pipes);
 		cmd = cmd->next_cmd;
 		i++;
 	}

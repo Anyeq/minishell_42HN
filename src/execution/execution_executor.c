@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/02/13 08:40:24 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/13 11:16:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,19 @@ static int	**ft_create_pipe(int n_cmd, t_cmd **pipeline)
 	return (pipes);
 }
 
+//TODO: Push it outside the executor
+t_helper	*ft_init_helper(t_cmd **pipeline, char **envp)
+{
+	t_helper	*helper;
+
+	helper = malloc(sizeof(t_helper));
+	helper->n_cmd = ft_cmd_count(*pipeline);
+	helper->envp = envp;
+}
+
 //TODO: add struct or add more parameter on ft_Executor to pass copy of env
-void	ft_executor(t_cmd **pipeline, char **envp)
+//TODO: Clean pipeline outside ft_executor
+void	ft_executor(t_cmd **pipeline, t_helper *helper)
 {
 	int		n_cmd;
 	int		**pipes;
@@ -36,19 +47,19 @@ void	ft_executor(t_cmd **pipeline, char **envp)
 
 	fork_status = 0;
 	pipes = NULL;
-	n_cmd = ft_cmd_count(*pipeline);
-	pids = malloc(sizeof(pid_t) * n_cmd);
+	pids = malloc(sizeof(pid_t) * helper->n_cmd);
 	if (pids == NULL)
 	{
+		perror("malloc error");
 		ft_free_pipeline(pipeline);
 		return ;
 	}
-	pipes = ft_if_multiple_cmd(n_cmd, pipeline);
+	pipes = ft_create_pipe(helper->n_cmd, pipeline);
 	if (pipes == NULL)
 		return ;
-	fork_status = ft_create_child_process(*pipeline, envp, pids, pipes);
+	fork_status = ft_create_child_process(*pipeline, helper, pids, pipes);
 	if (fork_status == 0)
-		ft_parent_process(pipes, pids, n_cmd);
-	ft_clean_pipe_allocation(n_cmd - 1, pipes);
+		ft_parent_process(pipes, pids, helper->n_cmd);
+	ft_clean_pipe_allocation(helper->n_cmd - 1, pipes);
 	free(pids);
 }
