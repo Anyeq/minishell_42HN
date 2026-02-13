@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/13 11:06:15 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/13 11:37:12 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_child_process(t_cmd *cmd, int i, t_helper *helper, int **pipes)
 	exit(1);
 }
 
-static void	ft_child_process_fail(t_helper *helper, int **pipes, int *pids, int i)
+static void	ft_child_process_failed(t_helper *helper, int **pipes, int *pids, int i)
 {
 	int	n;
 
@@ -64,8 +64,8 @@ int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids, int **pipes
 		pids[i] = fork();
 		if (pids[i] == -1)
 		{
-			perror("fork");
-			ft_child_process_fail(helper, pipes, pids, i);
+			perror("fork error");
+			ft_child_process_failed(helper, pipes, pids, i);
 			return (-1) ;
 		}
 		if (pids[i] == 0)
