@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/14 18:44:11 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/14 18:55:54 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*ft_get_env_value(char **envp, char *key)
 	int	i;
 
 	i = 0;
+	if (key == NULL)
+		return (NULL);
 	len = ft_strlen(key);
 	while (envp[i])
 	{
@@ -45,23 +47,26 @@ char	*ft_get_env_value(char **envp, char *key)
 	return (NULL);
 }
 
-char	*ft_var_case(char *str, int i, char **envp)
+char	*ft_var_case(char **result, char *str, int i, char **envp)
 {
-	char	*result;
 	char	*key;
 	char	*val;
+	char	*return_str;
+	int		start;
 
-	result = NULL;
+	start = i;
+	return_str = NULL;
 	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	key = ft_substr(str, start, i - start);
 	val = ft_get_env_value(envp, key);
 	if (val)
-		result = ft_join_and_free(result, ft_strdup(val));
+		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
-		result = ft_join_and_free(result, ft_strdup(""));
+		return_str = ft_join_and_free(*result, ft_strdup(""));
+	*result = NULL;
 	free(key);
-	return (result);
+	return (return_str);
 }
 
 char	*ft_expand_value(char *value, char **envp, int exit_status)
