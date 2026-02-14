@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/13 16:52:19 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/14 18:44:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,25 @@ char	*ft_get_env_value(char **envp, char *key)
 	return (NULL);
 }
 
+char	*ft_var_case(char *str, int i, char **envp)
+{
+	char	*result;
+	char	*key;
+	char	*val;
+
+	result = NULL;
+	while (ft_isalnum(str[i]) || str[i] == '_')
+		i++;
+	key = ft_substr(str, start, i - start);
+	val = ft_get_env_value(envp, key);
+	if (val)
+		result = ft_join_and_free(result, ft_strdup(val));
+	else if (val == NULL)
+		result = ft_join_and_free(result, ft_strdup(""));
+	free(key);
+	return (result);
+}
+
 char	*ft_expand_value(char *value, char **envp, int exit_status)
 {
 	char	*result;
@@ -71,7 +90,7 @@ char	*ft_expand_value(char *value, char **envp, int exit_status)
 			}
 			else if (ft_isalpha(value[i] || value[i] == '_'))
 			{
-				
+
 			}
 			else
 				result = ft_join_and_free(result, ft_strdup("$"));
