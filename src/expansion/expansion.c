@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/14 19:24:44 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/21 12:19:38 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ char	*ft_expand_value(char *value, char **envp, int exit_status)
 {
 	char	*result;
 	int		i;
+	char	*home;
 
+	home = NULL;
 	result = ft_strdup("");
 	if (result == NULL)
 	{
@@ -113,10 +115,20 @@ char	*ft_expand_value(char *value, char **envp, int exit_status)
 			}
 			else if (ft_isalpha(value[i] || value[i] == '_'))
 			{
-
+				ft_var_case();
 			}
 			else
 				result = ft_join_and_free(result, ft_strdup("$"));
+		}
+		else if (value[i] == '~' && i == 0)
+		{
+			home = ft_get_env_value(envp, "HOME");
+			//TODO: home could return NULL, in that case we should input ~ instead
+			result = ft_join_and_Free(result, home);
+			i++;
+		}
+		else
+		{
 		}
 	}
 }
