@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/21 12:19:38 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/21 12:25:10 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,10 @@ char	*ft_expand_value(char *value, char **envp, int exit_status)
 		}
 		else
 		{
+			//TODO: this should be handle with malloc
+			char	buf[2] = {value[i], 0};
+			result = ft_join_and_free(result, ft_strdup(buf));
+			i++;
 		}
 	}
 }
