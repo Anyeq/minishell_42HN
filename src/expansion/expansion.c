@@ -6,28 +6,11 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/21 12:42:07 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/22 11:07:02 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-
-char	*ft_join_and_free(char *str1, char *str2)
-{
-	char	*res;
-
-	res = ft_strjoin(str1, str2);
-	if (res == NULL)
-	{
-		perror("malloc error");
-		free(str1);
-		free(str2);
-		return (res);
-	}
-	free(str1);
-	free(str2);
-	return (res);
-}
 
 char	*ft_get_env_value(char **envp, char *key)
 {
@@ -148,44 +131,4 @@ void	ft_expand_tokens(t_token *tokens, char **envp, int exit_status)
 		tokens = tokens->next_token;
 	}
 	return ;
-}
-
-void	ft_remove_quotes(t_token *tokens)
-{
-	while (tokens)
-	{
-		if (tokens->type == TOKEN_WORD)
-			tokens->value = ft_strip_quotes(tokens->value);
-		tokens->next_token;
-	}
-}
-
-char	*ft_strip_quote(char *str)
-{
-	char	*result;
-	int		i;
-	int		j;
-	char	c;
-
-	i = 0;
-	j = 0;
-	result = malloc(ft_strlen(str) + 1);
-	//TODO: check the logic again in the way it copies the char
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '"')
-		{
-			c = str[i++];
-			while (str[i] && str[i] != c)
-				result[j++] = str[i++];
-			if (str[i] == c)
-				i++;
-		}
-		else
-			result[j++] = str[i++];
-	}
-	result[j] = 0;
-	//TODO: check if str have to be cleaned
-	free(str);
-	return (result);
 }
