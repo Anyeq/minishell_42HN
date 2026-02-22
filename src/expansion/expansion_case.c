@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:41:11 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/22 13:07:04 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ char	*ft_var_case(char **result, char *str, int i, char **envp)
 	char	*return_str;
 	int		start;
 
-	start = i;
+	start = *i;
 	return_str = NULL;
-	while (ft_isalnum(str[i]) || str[i] == '_')
-		i++;
-	key = ft_substr(str, start, i - start);
+	while (ft_isalnum(str[*i]) || str[*i] == '_')
+		*i = *i + 1;
+	key = ft_substr(str, start, *i - start);
 	val = ft_get_env_value(envp, key);
 	if (val)
 		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
-		return_str = ft_join_and_free(*result, ft_strdup(""));
+		return_str = ft_join_and_free(*resut, ft_strdup(""));
 	*result = NULL;
 	free(key);
 	return (return_str);
 }
 
-char	*ft_exit_status_case(char **result, char *str, int i, char **envp)
+char	*ft_exit_status_case(char **result, int *i, int exit_status)
 {
 	char	*return_val;
 	char	*str_exit_status;
@@ -67,10 +67,12 @@ char	*ft_exit_status_case(char **result, char *str, int i, char **envp)
 	if (return_val == NULL)
 		return (NULL);
 	*result = NULL;
+	str_exit_status = NULL;
+	*i = *i + 1;
 	return (return_val);
 }
 
-char	*ft_normal_case(char chr, char **str_to_join)
+char	*ft_normal_case(char chr, char **str_to_join, int *i)
 {
 	char	*result;
 	char	*buff;
@@ -87,5 +89,21 @@ char	*ft_normal_case(char chr, char **str_to_join)
 	result = ft_join_and_free(*str_to_join, buff);
 	*str_to_join = NULL;
 	buff = NULL;
+	*i = *i + 1;
 	return (result);
+}
+
+char	*ft_home_case(char **str_to_join, char **envp, int *i)
+{
+	char	*home;
+	char	*result;
+
+	home = ft_get_env_value(envp, "HOME");
+	if (home == NULL)
+		result = ft_join_and_free(*str_to_join, ft_strdup("~"));
+	else
+		result = ft_join_and_free(*str_to_join, home);
+	home = NULL;
+	*str_to_join = NULL;
+	*i = *i + 1;
 }

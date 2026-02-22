@@ -6,11 +6,17 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:41:15 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/22 13:07:02 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
+
+static char	*ft_if_dollar_sign(char *str_to_join, int *i, char **envp,
+							   int exit_status)
+{
+	char	*result;
+}
 
 static char	*ft_expand_value(char *value, char **envp, int exit_status)
 {
@@ -32,31 +38,17 @@ static char	*ft_expand_value(char *value, char **envp, int exit_status)
 		{
 			i++;
 			if (value[i] == '?')
-			{
-				result = ft_join_and_free(result, ft_itoa(exit_status));
-				if (result == NULL)
-					return (NULL);
-				i++;
-			}
+				result = ft_exit_status_case(&result, &i, exit_status);
 			else if (ft_isalpha(value[i] || value[i] == '_'))
-			{
-				ft_var_case();
-			}
+				result = ft_var_case(&result, value, &i, envp);
 			else
 				result = ft_join_and_free(result, ft_strdup("$"));
 		}
 		else if (value[i] == '~' && i == 0)
-		{
-			home = ft_get_env_value(envp, "HOME");
-			//TODO: home could return NULL, in that case we should input ~ instead
-			result = ft_join_and_Free(result, home);
-			i++;
-		}
+			result = ft_home_case(&result, envp, &i);
 		else
-		{
-			result = ft_normal_case(value[i], &result);
-			i++;
-		}
+			//TODO: handle when result == NULL
+			result = ft_normal_case(value[i], &result, &i);
 	}
 	free(value);
 	return (result);
