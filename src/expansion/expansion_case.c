@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:10:23 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/22 11:41:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,24 @@ char	*ft_exit_status_case(char **result, char *str, int i, char **envp)
 		return (NULL);
 	*result = NULL;
 	return (return_val);
+}
+
+char	*ft_normal_case(char chr, char **str_to_join)
+{
+	char	*result;
+	char	*buff;
+
+	result = NULL;
+	buff = malloc(sizeof(char) * 2);
+	if (buff == NULL)
+	{
+		perror("malloc error");
+		return (NULL);
+	}
+	buff[0] = chr;
+	buff[1] = '\0';
+	result = ft_join_and_free(*str_to_join, buff);
+	*str_to_join = NULL;
+	buff = NULL;
+	return (result);
 }

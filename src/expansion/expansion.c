@@ -6,26 +6,26 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:10:09 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/22 11:41:15 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-char	*ft_expand_value(char *value, char **envp, int exit_status)
+static char	*ft_expand_value(char *value, char **envp, int exit_status)
 {
 	char	*result;
 	int		i;
 	char	*home;
 
 	home = NULL;
+	i = 0;
 	result = ft_strdup("");
 	if (result == NULL)
 	{
 		perror("malloc error");
 		return (NULL);
 	}
-	i = 0;
 	while (value[i])
 	{
 		if (value[i] == '$')
@@ -54,9 +54,7 @@ char	*ft_expand_value(char *value, char **envp, int exit_status)
 		}
 		else
 		{
-			//TODO: this should be handle with malloc
-			char	buf[2] = {value[i], 0};
-			result = ft_join_and_free(result, ft_strdup(buf));
+			result = ft_normal_case(value[i], &result);
 			i++;
 		}
 	}
@@ -64,6 +62,8 @@ char	*ft_expand_value(char *value, char **envp, int exit_status)
 	return (result);
 }
 
+//TODO: On other file envp should be a copy of envp from main parameter
+//TODO: exit_status should be an integer comming from other process
 void	ft_expand_tokens(t_token *tokens, char **envp, int exit_status)
 {
 	while (tokens)

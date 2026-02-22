@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:05:01 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:08:09 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/22 11:34:44 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_join_and_free(char *str1, char *str2)
 		perror("malloc error");
 		free(str1);
 		free(str2);
-		return (res);
+		return (NULL);
 	}
 	free(str1);
 	free(str2);
