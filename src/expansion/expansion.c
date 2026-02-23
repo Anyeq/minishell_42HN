@@ -6,16 +6,28 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 13:07:02 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/23 15:09:08 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-static char	*ft_if_dollar_sign(char *str_to_join, int *i, char **envp,
+static char	*ft_if_dollar_sign(char *str, int *i, char **envp,
 							   int exit_status)
 {
-	char	*result;
+	char	*return_val;
+
+	return_val = NULL;
+	*i = *i + 1;
+	if (str[*i] == '?')
+		return_val = ft_exit_status_case(ft_strdup(""), i, exit_status);
+	else if (ft_isalpha(str[*i] || str[*i] == '_'))
+		return_val = ft_var_case(ft_strdup(""), str, i, envp);
+	else
+		return_val = ft_join_and_free(ft_strdup(""), ft_strdup("$"));
+	if (return_val == NULL)
+		perror("malloc error");
+	return (return_val);
 }
 
 static char	*ft_expand_value(char *value, char **envp, int exit_status)
@@ -23,8 +35,10 @@ static char	*ft_expand_value(char *value, char **envp, int exit_status)
 	char	*result;
 	int		i;
 	char	*home;
+	char	*temp;
 
 	home = NULL;
+	temp = NULL;
 	i = 0;
 	result = ft_strdup("");
 	if (result == NULL)
@@ -36,6 +50,8 @@ static char	*ft_expand_value(char *value, char **envp, int exit_status)
 	{
 		if (value[i] == '$')
 		{
+			temp = ft_if_dollar_sign(value, &i, envp, exit_status);
+			result = ft_join_and_free(result, temp);
 			i++;
 			if (value[i] == '?')
 				result = ft_exit_status_case(&result, &i, exit_status);

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 13:07:04 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/23 14:51:09 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ char	*ft_exit_status_case(char **result, int *i, int exit_status)
 	return (return_val);
 }
 
-char	*ft_normal_case(char chr, char **str_to_join, int *i)
+char	*ft_normal_case(char chr, char **result, int *i)
 {
-	char	*result;
+	char	*return_val;
 	char	*buff;
 
-	result = NULL;
+	return_val = NULL;
 	buff = malloc(sizeof(char) * 2);
 	if (buff == NULL)
 	{
@@ -86,24 +86,25 @@ char	*ft_normal_case(char chr, char **str_to_join, int *i)
 	}
 	buff[0] = chr;
 	buff[1] = '\0';
-	result = ft_join_and_free(*str_to_join, buff);
-	*str_to_join = NULL;
+	return_val = ft_join_and_free(*result, buff);
+	*result = NULL;
 	buff = NULL;
 	*i = *i + 1;
-	return (result);
+	return (return_val);
 }
 
-char	*ft_home_case(char **str_to_join, char **envp, int *i)
+char	*ft_home_case(char **result, char **envp, int *i)
 {
 	char	*home;
-	char	*result;
+	char	*return_val;
 
 	home = ft_get_env_value(envp, "HOME");
 	if (home == NULL)
-		result = ft_join_and_free(*str_to_join, ft_strdup("~"));
+		return_val = ft_join_and_free(*result, ft_strdup("~"));
 	else
-		result = ft_join_and_free(*str_to_join, home);
+		return_val = ft_join_and_free(*result, home);
 	home = NULL;
-	*str_to_join = NULL;
+	*result = NULL;
 	*i = *i + 1;
+	return (return_val);
 }
