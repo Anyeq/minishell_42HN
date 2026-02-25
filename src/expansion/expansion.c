@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/02/23 15:09:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/25 07:42:24 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static char	*ft_expand_value(char *value, char **envp, int exit_status)
 		else if (value[i] == '~' && i == 0)
 			result = ft_home_case(&result, envp, &i);
 		else
-			//TODO: handle when result == NULL
 			result = ft_normal_case(value[i], &result, &i);
+		//TODO: handle when result == NULL
 	}
 	free(value);
 	return (result);
