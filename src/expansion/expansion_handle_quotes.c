@@ -6,23 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:06:14 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:08:03 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/25 15:38:08 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-void	ft_remove_quotes(t_token *tokens)
-{
-	while (tokens)
-	{
-		if (tokens->type == TOKEN_WORD)
-			tokens->value = ft_strip_quotes(tokens->value);
-		tokens->next_token;
-	}
-}
-
-char	*ft_strip_quote(char *str)
+static char	*ft_strip_quote(char *str)
 {
 	char	*result;
 	int		i;
@@ -50,4 +40,14 @@ char	*ft_strip_quote(char *str)
 	//TODO: check if str have to be cleaned
 	free(str);
 	return (result);
+}
+
+void	ft_remove_quotes(t_token *tokens)
+{
+	while (tokens)
+	{
+		if (tokens->type == TOKEN_WORD)
+			tokens->value = ft_strip_quotes(tokens->value);
+		tokens->next_token;
+	}
 }
