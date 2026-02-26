@@ -6,12 +6,15 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 15:32:54 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 15:38:23 by asando           ###   ########.fr       */
+/*   Updated: 2026/02/25 18:15:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANSION_H
 # define EXPANSION_H
+
+#include "libft.h"
+#include <unistd.h>
 
 void	ft_expand_tokens(t_token *tokens, char **envp, int exit_status);
 char	*ft_get_env_value(char **envp, char *key);
