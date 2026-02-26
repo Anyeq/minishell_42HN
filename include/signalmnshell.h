@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signalmnshell.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/18 19:26:20 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 09:02:55 by asando           ###   ########.fr       */
+/*   Created: 2026/02/25 15:27:16 by asando            #+#    #+#             */
+/*   Updated: 2026/02/25 15:30:41 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SIGNALMNSHELL_H
+# define SIGNALMNSHELL_H
 
-//NOTE: Global variable for exit status
+#include <signal.h>
+#include <unistd.h>
+#include <readline/readline.h>
 
-int	g_exit_status = 0;
+void	ft_sigint_handler_shell(int sig);
+void	ft_sigint_handler_heredoc(int sig);
+void	ft_setup_signals_shell(void);
+void	ft_setup_signals_heredoc(void);
+void	ft_setup_signals_child(void);
 
-int	main(int argc, char **argv, char **envp)
-{
-	char		*line;
-	t_token		*tokens;
-	t_cmd		*cmds;
-	t_helper	helper;
-
-	(void)argc;
-	(void)argv;
-	helper.envp = ft_copy_envp(envp);
-	if (helper.envp == NULL)
-	{
-		perror("malloc error");
-		return (NULL);
-	}
-	minishell_loop(&helper);
-	free(helper.envp);
-	return (0);
-}
+#endif

@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/18 19:26:20 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 09:02:55 by asando           ###   ########.fr       */
+/*   Created: 2026/02/25 08:22:59 by asando            #+#    #+#             */
+/*   Updated: 2026/02/25 08:52:31 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//NOTE: Global variable for exit status
-
-int	g_exit_status = 0;
-
-int	main(int argc, char **argv, char **envp)
+char	**ft_copy_envp(char **envp)
 {
-	char		*line;
-	t_token		*tokens;
-	t_cmd		*cmds;
-	t_helper	helper;
+	char	**result;
+	int		n_envp;
+	int		i;
 
-	(void)argc;
-	(void)argv;
-	helper.envp = ft_copy_envp(envp);
-	if (helper.envp == NULL)
+	n_envp = 0;
+	i = 0;
+	while (envp[n_envp])
+		n_envp++;
+	result = malloc(sizeof(char *) * (n_envp + 1));
+	if (result == NULL)
 	{
 		perror("malloc error");
-		return (NULL);
+		return (result);
 	}
-	minishell_loop(&helper);
-	free(helper.envp);
-	return (0);
+	while (i < n_envp)
+	{
+		result[i] = ft_strdup(envp[i]);
+		if (result[i] == NULL)
+		{
+			while (i-- > -1)
+				free(result[i]);
+			free(result);
+			return (NULL);
+		}
+		i++;
+	}
+	result[n_envp] = NULL;
+	return (result);
 }
