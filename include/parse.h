@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:02:27 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 20:13:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/04 18:06:04 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "libft.h"
+# include "../lib/libft/includes/libft.h"
 # include "lexer.h"
 # include <stdlib.h>
 # include <stdio.h>

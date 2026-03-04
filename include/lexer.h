@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:53:38 by asando            #+#    #+#             */
-/*   Updated: 2026/01/31 20:40:10 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/04 18:05:41 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "libft.h"
+# include "../lib/libft/includes/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 
