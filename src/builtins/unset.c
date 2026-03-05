@@ -1,53 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 21:40:25 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/05 21:40:26 by eynaksho         ###   ########.fr       */
+/*   Created: 2026/03/05 21:41:18 by eynaksho          #+#    #+#             */
+/*   Updated: 2026/03/05 21:41:19 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	check_n_flag(char *arg)
+static void	remove_env_var(t_shell *shell, char *key)
 {
-	int	i;
+	t_env	*env;
+	t_env	*prev;
 
-	if (!arg || arg[0] != '-')
-		return (0);
-	i = 1;
-	while (arg[i])
+	env = shell->env;
+	prev = NULL;
+	while (env)
 	{
-		if (arg[i] != 'n')
-			return (0);
-		i++;
+		if (ft_strncmp(env->key, key, ft_strlen(key) + 1) == 0)
+		{
+			if (prev)
+				prev->next = env->next;
+			else
+				shell->env = env->next;
+			free(env->key);
+			free(env->value);
+			free(env);
+			return ;
+		}
+		prev = env;
+		env = env->next;
 	}
-	return (i > 1);
 }
 
-int	builtin_echo(t_cmd *cmd)
+int	builtin_unset(t_cmd *cmd, t_shell *shell)
 {
 	int	i;
-	int	newline;
 
-	newline = 1;
 	i = 1;
-	while (cmd->args[i] && check_n_flag(cmd->args[i]))
-	{
-		newline = 0;
-		i++;
-	}
 	while (cmd->args[i])
 	{
-		ft_putstr_fd(cmd->args[i], 1);
-		if (cmd->args[i + 1])
-			ft_putstr_fd(" ", 1);
+		remove_env_var(shell, cmd->args[i]);
 		i++;
 	}
-	if (newline)
-		ft_putstr_fd("\n", 1);
 	return (0);
 }
