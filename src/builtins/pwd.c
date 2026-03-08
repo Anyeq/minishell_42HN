@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 13:54:25 by asando            #+#    #+#             */
-/*   Updated: 2026/03/04 18:05:59 by eynaksho         ###   ########.fr       */
+/*   Created: 2026/03/05 21:40:30 by eynaksho          #+#    #+#             */
+/*   Updated: 2026/03/05 21:40:31 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-# include "lexer.h"
-# include "parse.h"
-# include "env.h"
+int	builtin_pwd(void)
+{
+	char	*cwd;
 
-
-#endif
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("minishell: pwd");
+		return (1);
+	}
+	ft_putendl_fd(cwd, 1);
+	free(cwd);
+	return (0);
+}

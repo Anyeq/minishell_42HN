@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 13:54:25 by asando            #+#    #+#             */
-/*   Updated: 2026/03/04 18:05:59 by eynaksho         ###   ########.fr       */
+/*   Created: 2026/03/08 13:32:02 by asando            #+#    #+#             */
+/*   Updated: 2026/03/08 13:37:17 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtin"
 
-# include "lexer.h"
-# include "parse.h"
-# include "env.h"
+int	builtin_export(char **args, char ***envp)
+{
+	int	i;
 
+	i = 0;
+	if (args[1] == NULL)
+	{
+		while ((*envp)[i])
+		{
+			printf("%s\n", (*envp)[i]);
+			i++;
+		}
+		return (0);
+	}
+	while (args[i])
+}
 
-#endif

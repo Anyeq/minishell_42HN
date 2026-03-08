@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 13:54:25 by asando            #+#    #+#             */
-/*   Updated: 2026/03/04 18:05:59 by eynaksho         ###   ########.fr       */
+/*   Created: 2026/03/05 21:40:28 by eynaksho          #+#    #+#             */
+/*   Updated: 2026/03/05 21:40:29 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-# include "lexer.h"
-# include "parse.h"
-# include "env.h"
+int	builtin_env(t_shell *shell)
+{
+	t_env	*env;
 
-
-#endif
+	env = shell->env;
+	while (env)
+	{
+		if (env->value)
+		{
+			ft_putstr_fd(env->key, 1);
+			ft_putstr_fd("=", 1);
+			ft_putendl_fd(env->value, 1);
+		}
+		env = env->next;
+	}
+	return (0);
+}
