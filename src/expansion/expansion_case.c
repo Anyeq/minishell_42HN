@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/02/23 14:51:09 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 09:42:50 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_get_env_value(char **envp, char *key)
 	return (NULL);
 }
 
-char	*ft_var_case(char **result, char *str, int i, char **envp)
+char	*ft_var_case(char **result, char *str, int *i, char **envp)
 {
 	char	*key;
 	char	*val;
@@ -46,21 +46,21 @@ char	*ft_var_case(char **result, char *str, int i, char **envp)
 	if (val)
 		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
-		return_str = ft_join_and_free(*resut, ft_strdup(""));
+		return_str = ft_join_and_free(*result, ft_strdup(""));
 	*result = NULL;
 	free(key);
 	return (return_str);
 }
 
-char	*ft_exit_status_case(char **result, int *i, int exit_status)
+char	*ft_exit_status_case(char **result, int *i)
 {
 	char	*return_val;
 	char	*str_exit_status;
 
-	str_exit_status = ft_itoa(exit_status);
+	str_exit_status = ft_itoa(g_exit_status);
 	if (str_exit_status == NULL)
 	{
-		perror("malloc error");
+		perror("minishell: malloc error");
 		return (NULL);
 	}
 	return_val = ft_join_and_free(*result, str_exit_status);

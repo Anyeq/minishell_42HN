@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:05:01 by asando            #+#    #+#             */
-/*   Updated: 2026/02/22 11:34:44 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 09:25:15 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_join_and_free(char *str1, char *str2)
 	res = ft_strjoin(str1, str2);
 	if (res == NULL)
 	{
-		perror("malloc error");
+		perror("minishell: malloc error");
 		free(str1);
 		free(str2);
 		return (NULL);
