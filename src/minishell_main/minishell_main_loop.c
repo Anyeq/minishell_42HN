@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 09:49:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 12:50:20 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	minishell_loop(t_helper *helper)
 		if (tokens == NULL)
 		{
 			free(line);
-			break ;
+			continue ;
 		}
 		free(line);
 		line = NULL;
@@ -45,15 +45,20 @@ void	minishell_loop(t_helper *helper)
 		if (expand_status == -1)
 		{
 			ft_free_token_list(&tokens);
-			break ;
+			continue ;
 		}
 		pipeline = ft_parse(tokens);
 		if (pipeline == NULL)
 		{
 			ft_free_token_list(&tokens);
-			break ;
+			continue ;
 		}
 		ft_free_token_list(&tokens);
+		if (ft_prepare_heredoc(pipeline) == -1)
+		{
+			ft_free_pipeline(&pipeline);
+			continue ;
+		}
 		ft_executor(&pipeline, helper);
 		ft_free_pipeline(&pipeline);
 	}

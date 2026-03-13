@@ -6,13 +6,13 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:40:35 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/05 21:40:36 by eynaksho         ###   ########.fr       */
+/*   Updated: 2026/03/13 12:59:54 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
-int	is_builtin(char *cmd)
+int	ft_is_builtin(char *cmd)
 {
 	if (!cmd)
 		return (0);
@@ -33,7 +33,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-int	exec_builtin(t_cmd *cmd, t_shell *shell)
+int	ft_exec_builtin(t_cmd *cmd, t_shell *shell)
 {
 	if (ft_strncmp(cmd->args[0], "echo", 5) == 0)
 		return (builtin_echo(cmd));

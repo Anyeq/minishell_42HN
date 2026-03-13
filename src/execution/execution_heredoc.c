@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:55:38 by asando            #+#    #+#             */
-/*   Updated: 2026/02/08 13:25:07 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 12:55:07 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	ft_write_line(int fd, const char *line)
 	return ;
 }
 
-//NOTE: Check what whould cause readline error and what to return 
 static int	ft_read_heredoc(const char *delimiter, int write_fd)
 {
 	char	*line;
@@ -50,7 +49,7 @@ static int	ft_read_heredoc(const char *delimiter, int write_fd)
 	return (0);
 }
 
-static int	ft_single_heredoc(t_redir *redirs)
+static int	ft_heredoc(t_redir *redirs)
 {
 	int	pipe_fd[2];
 
@@ -79,7 +78,7 @@ static int	ft_cmd_heredoc(t_cmd *cmd)
 	{
 		if (redir->type == TOKEN_HEREDOC)
 		{
-			if (ft_single_heredoc(redir) == -1)
+			if (ft_heredoc(redir) == -1)
 				return (-1);
 		}
 		redir = redir->next_redir;

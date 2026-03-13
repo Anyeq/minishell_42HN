@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/02/13 11:40:02 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 13:00:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ static void	ft_child_process(t_cmd *cmd, int i, t_helper *helper, int **pipes)
 		n++;
 	}
 	ft_redirection_function(cmd->redirs);
-	// NOTE: Waiting for the real buildint interface
-	if (ft_is_buildint(cmd->args[0]))
+	if (ft_is_builtin(cmd->args[0]))
 	{
-		ft_run_buildint(cmd->args[0]);
+		ft_exec_builtin(cmd->args[0], helper->envp);
 		exit(0);
 	}
 	execve(ft_find_path(cmd->args[0]), cmd->args, helper->envp);
-	perror("execve error");
+	perror("minishell: execve error");
 	exit(1);
 }
 
@@ -50,7 +49,7 @@ static void	ft_child_process_failed(t_helper *helper, int **pipes, int *pids, in
 		waitpid(pids[n], NULL, 0);
 		n++;
 	}
-	// TODO: Maybe we have to add it to global variable here
+	g_exit_status = 1;
 	return ;
 }
 
@@ -64,7 +63,7 @@ int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids, int **pipes
 		pids[i] = fork();
 		if (pids[i] == -1)
 		{
-			perror("fork error");
+			perror("minishell: fork error");
 			ft_child_process_failed(helper, pipes, pids, i);
 			return (-1) ;
 		}

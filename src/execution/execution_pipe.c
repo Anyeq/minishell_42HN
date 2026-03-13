@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:15:32 by asando            #+#    #+#             */
-/*   Updated: 2026/02/13 11:19:46 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 11:45:43 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	**ft_allocate_pipes(int n_cmd)
 	pipes = malloc(sizeof(int *) * (n_cmd - 1));
 	if (pipes == NULL)
 	{
-		perror("malloc error");
+		perror("minishell: malloc error");
 		return (NULL);
 	}
 	while (i < n_cmd - 1)
@@ -29,9 +29,9 @@ static int	**ft_allocate_pipes(int n_cmd)
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (pipes[i] == NULL)
 		{
-			perror("malloc error");
+			perror("minishell: malloc error");
 			ft_clean_pipe_allocation(i, pipes);
-			free(pipes);
+			pipes = NULL;
 			return (NULL);
 		}
 		i++;
@@ -39,7 +39,6 @@ static int	**ft_allocate_pipes(int n_cmd)
 	return (pipes);
 }
 
-//NOTE: when NULL should clean everything
 int	**ft_init_pipe(int n_cmd)
 {
 	int	i;
@@ -53,10 +52,10 @@ int	**ft_init_pipe(int n_cmd)
 	{
 		if (pipe(pipes[i]) == -1)
 		{
-			perror("pipe error");
+			perror("minishell: pipe error");
 			ft_close_pipes(i, pipes);
 			ft_clean_pipe_allocation(i, pipes);
-			free(pipes);
+			pipes = NULL;
 			return (NULL);
 		}
 		i++;

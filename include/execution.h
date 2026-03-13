@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:11:21 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 15:29:22 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 11:58:45 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_prepare_heredoc(t_cmd *pipeline);
 int		ft_parent_process(int **pipes, pid_t *pids, int	n_cmd);
 
 // Child process function (execution_child_process.c)
-void	ft_run_child_process(t_cmd *cmd, int n_cmd, int *pids, int **pipes)
+void	ft_run_child_process(t_cmd *cmd, int n_cmd, int *pids, int **pipes);
 
 // Main function in execution (execution_executor.c)
 void	ft_executor(t_cmd *pipeline);
