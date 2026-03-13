@@ -6,13 +6,12 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 08:44:33 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 09:00:09 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//NOTE: After ft_lexer_loop line need to be cleaned
 void	minishell_loop(t_helper *helper)
 {
 	char	*line;
@@ -46,18 +45,18 @@ void	minishell_loop(t_helper *helper)
 		ft_expand_tokens(tokens, helper->envp, g_exit_status);
 		if (ft_expand_tokens == -1)
 		{
-			//TODO: free tokens;
+			ft_free_token_list(&tokens);
 			continue ;
 		}
 		pipeline = ft_parse(tokens);
 		if (pipeline == NULL)
 		{
-			//TODO: clean tokens properly
+			ft_free_token_list(&tokens);
 			continue ;
 		}
-		//TODO: clean tokens properly
+		ft_free_token_list(&tokens);
 		ft_executor(&pipeline, helper);
-		//TODO: clean pipeline properly
+		ft_free_pipeline(&pipeline);
 	}
 	return ;
 }
