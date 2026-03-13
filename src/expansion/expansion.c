@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 09:50:17 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 11:21:35 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_expand_value(char *value, char **envp)
 		else
 			result = ft_normal_case(value[i], &result, &i);
 	}
-	if (result != NULL)
+	if (result)
 		free(value);
 	return (result);
 }
@@ -55,6 +55,9 @@ static char	*ft_expand_value(char *value, char **envp)
 // NOTE: Case if is no quote and one quote should be consider
 int	ft_expand_tokens(t_token *tokens, char **envp)
 {
+	t_token	*head;
+
+	head = tokens;
 	while (tokens)
 	{
 		if (tokens->type == TOKEN_WORD && tokens->flag_quote == Q_DOUBLE)
@@ -65,5 +68,7 @@ int	ft_expand_tokens(t_token *tokens, char **envp)
 		}
 		tokens = tokens->next_token;
 	}
+	if (ft_remove_quotes(head) == -1)
+		return (-1);
 	return (0);
 }

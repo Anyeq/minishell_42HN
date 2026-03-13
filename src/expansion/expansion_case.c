@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 09:42:50 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 11:27:20 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_normal_case(char chr, char **result, int *i)
 	buff = malloc(sizeof(char) * 2);
 	if (buff == NULL)
 	{
-		perror("malloc error");
+		perror("minishell: malloc error");
 		return (NULL);
 	}
 	buff[0] = chr;

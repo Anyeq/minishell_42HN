@@ -6,12 +6,26 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:06:14 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 15:38:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 11:20:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
+static void	ft_quote_found(char *str, int *i, int *j, char *result)
+{
+	char	quote;
+
+	quote = str[*i];
+	*i = *i + 1;
+	while (str[*i] && str[*i] != quote)
+		result[(*j)++] = str[(*i)++];
+	if (str[*i] == quote)
+		(*i)++;
+	return ;
+}
+
+//NOTE: Memmory allocation allocate with quote (inefficient)
 static char	*ft_strip_quote(char *str)
 {
 	char	*result;
@@ -22,32 +36,36 @@ static char	*ft_strip_quote(char *str)
 	i = 0;
 	j = 0;
 	result = malloc(ft_strlen(str) + 1);
-	//TODO: check the logic again in the way it copies the char
+	if (result == NULL)
+	{
+		perror("minishell: malloc error");
+		return (NULL);
+	}
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '"')
-		{
-			c = str[i++];
-			while (str[i] && str[i] != c)
-				result[j++] = str[i++];
-			if (str[i] == c)
-				i++;
-		}
+			ft_quote_found(str, &i, &j, result);
 		else
 			result[j++] = str[i++];
 	}
-	result[j] = 0;
-	//TODO: check if str have to be cleaned
-	free(str);
+	result[j] = '\0';
+	if (result)
+		free(str);
 	return (result);
 }
 
-void	ft_remove_quotes(t_token *tokens)
+//NOTE: skip non quote tokens
+int	ft_remove_quotes(t_token *tokens)
 {
 	while (tokens)
 	{
 		if (tokens->type == TOKEN_WORD)
+		{
 			tokens->value = ft_strip_quotes(tokens->value);
-		tokens->next_token;
+			if (tokens->value == NULL)
+				return (-1);
+		}
+		tokens = tokens->next_token;
 	}
+	return (0);
 }
