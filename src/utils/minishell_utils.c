@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 08:22:59 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 08:52:31 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 08:22:17 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ char	**ft_copy_envp(char **envp)
 		n_envp++;
 	result = malloc(sizeof(char *) * (n_envp + 1));
 	if (result == NULL)
-	{
-		perror("malloc error");
 		return (result);
-	}
 	while (i < n_envp)
 	{
 		result[i] = ft_strdup(envp[i]);
