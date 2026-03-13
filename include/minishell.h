@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:54:25 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 08:33:36 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 16:25:12 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 # include "lexer.h"
 # include "parse.h"
+# include "exepansion.h"
+# include "execution.h"
 # include "env.h"
 
 //UTILS
 char	**ft_copy_envp(char **envp);
+void	minishell_loop(t_helper *helper);
 
 #endif
