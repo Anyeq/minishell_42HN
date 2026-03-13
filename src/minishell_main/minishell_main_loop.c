@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 09:00:09 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 09:49:43 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	minishell_loop(t_helper *helper)
 	char	*line;
 	t_token	*tokens;
 	t_cmd	*pipeline;
+	int		expand_status;
 
 	while (1)
 	{
@@ -36,23 +37,21 @@ void	minishell_loop(t_helper *helper)
 		if (tokens == NULL)
 		{
 			free(line);
-			continue ;
+			break ;
 		}
 		free(line);
 		line = NULL;
-		// TODO: Expansion here
-		// FIX: ft_expand_tokens need to return code to indicate it is not error
-		ft_expand_tokens(tokens, helper->envp, g_exit_status);
-		if (ft_expand_tokens == -1)
+		expand_status = ft_expand_tokens(tokens, helper->envp);
+		if (expand_status == -1)
 		{
 			ft_free_token_list(&tokens);
-			continue ;
+			break ;
 		}
 		pipeline = ft_parse(tokens);
 		if (pipeline == NULL)
 		{
 			ft_free_token_list(&tokens);
-			continue ;
+			break ;
 		}
 		ft_free_token_list(&tokens);
 		ft_executor(&pipeline, helper);
