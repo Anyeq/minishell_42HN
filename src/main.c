@@ -6,13 +6,12 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 19:26:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 08:35:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 16:30:19 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//NOTE: Global variable for exit status
 int	g_exit_status = 0;
 
 int	main(int argc, char **argv, char **envp)

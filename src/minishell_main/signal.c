@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 13:16:37 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 15:30:47 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 16:37:54 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signalmnshell.h"
 
-void	ft_sigint_handler_shell(int sig)
+static void	ft_sigint_handler_shell(int sig)
 {
 	(void)sig;
 	g_exit_status = 130;
@@ -22,7 +22,7 @@ void	ft_sigint_handler_shell(int sig)
 	rl_redisplay();
 }
 
-void	ft_sigint_handler_heredoc(int sig)
+static void	ft_sigint_handler_heredoc(int sig)
 {
 	(void)sig;
 	g_exit_status = 130;

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 15:46:06 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 16:50:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids,
 			return (-1);
 		}
 		if (pids[i] == 0)
+		{
+			ft_setup_signals_child(void);
 			ft_child_process(cmd, i, helper, pipes);
+		}
 		cmd = cmd->next_cmd;
 		i++;
 	}

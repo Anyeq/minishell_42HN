@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 16:22:58 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 16:46:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,14 @@ static int	ft_prepare_cmd(t_tokens **tokens, t_cmd **pipeline)
 		return (-1);
 	}
 	ft_free_token_list(tokens);
+	ft_setup_signals_heredoc(void);
 	if (ft_prepare_heredoc(*pipeline) == -1)
 	{
+		ft_setup_signals_shell(void);
 		ft_free_pipeline(pipeline);
 		return (-1);
 	}
+	ft_setup_signals_shell(void);
 	return (0);
 }
 
@@ -76,6 +79,7 @@ void	minishell_loop(t_helper *helper)
 	t_cmd	*pipeline;
 	int		status;
 
+	ft_setup_signals_shell(void);
 	while (1)
 	{
 		status = ft_prepare_tokens(&tokens, helper);
