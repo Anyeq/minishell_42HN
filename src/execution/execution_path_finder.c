@@ -6,11 +6,11 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:56:32 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 12:20:22 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 15:47:18 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "execution.h"
+#include "execution.h"
 
 static char	*ft_strjoin3(char *str1, char *str2, char *str3)
 {
@@ -75,7 +75,7 @@ char	*ft_find_path(char *path)
 	{
 		full_path = ft_strjoin3(paths[i], "/", path);
 		if (ft_access_path(full_path, paths))
-			return (full_path)
+			return (full_path);
 		free(full_path);
 		i++;
 	}

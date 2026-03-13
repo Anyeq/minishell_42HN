@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 13:00:21 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 15:46:06 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	ft_child_process(t_cmd *cmd, int i, t_helper *helper, int **pipes)
 	exit(1);
 }
 
-static void	ft_child_process_failed(t_helper *helper, int **pipes, int *pids, int i)
+static void	ft_child_process_failed(t_helper *helper, int **pipes, int *pids,
+				int i)
 {
 	int	n;
 
@@ -53,7 +54,8 @@ static void	ft_child_process_failed(t_helper *helper, int **pipes, int *pids, in
 	return ;
 }
 
-int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids, int **pipes)
+int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids,
+				int **pipes)
 {
 	int	i;
 
@@ -65,7 +67,7 @@ int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids, int **pipes
 		{
 			perror("minishell: fork error");
 			ft_child_process_failed(helper, pipes, pids, i);
-			return (-1) ;
+			return (-1);
 		}
 		if (pids[i] == 0)
 			ft_child_process(cmd, i, helper, pipes);
