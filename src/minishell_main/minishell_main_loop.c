@@ -6,12 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/02/25 09:09:33 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 08:44:33 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//NOTE: After ft_lexer_loop line need to be cleaned
 void	minishell_loop(t_helper *helper)
 {
 	char	*line;
@@ -32,7 +33,6 @@ void	minishell_loop(t_helper *helper)
 			continue ;
 		}
 		add_history(line);
-		//TODO: Need to know if line being clean on ft_lexer_loop
 		tokens = ft_lexer_loop(line);
 		if (tokens == NULL)
 		{
@@ -40,13 +40,12 @@ void	minishell_loop(t_helper *helper)
 			continue ;
 		}
 		free(line);
+		line = NULL;
 		// TODO: Expansion here
 		// FIX: ft_expand_tokens need to return code to indicate it is not error
 		ft_expand_tokens(tokens, helper->envp, g_exit_status);
 		if (ft_expand_tokens == -1)
 		{
-			//NOTE: if line is already cleaned no need to clean again
-			free(line);
 			//TODO: free tokens;
 			continue ;
 		}
