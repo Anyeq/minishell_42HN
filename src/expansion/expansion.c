@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 11:21:35 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 20:56:17 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-static char	*ft_expand_dollar(char *str, int *i, char **envp, char **result)
+static char	*ft_expand_dollar(char *str, int *i, t_env *envp, char **result)
 {
 	char	*return_val;
 
@@ -27,7 +27,7 @@ static char	*ft_expand_dollar(char *str, int *i, char **envp, char **result)
 	return (return_val);
 }
 
-static char	*ft_expand_value(char *value, char **envp)
+static char	*ft_expand_value(char *value, t_env *envp)
 {
 	char	*result;
 	int		i;
@@ -53,7 +53,7 @@ static char	*ft_expand_value(char *value, char **envp)
 }
 
 // NOTE: Case if is no quote and one quote should be consider
-int	ft_expand_tokens(t_token *tokens, char **envp)
+int	ft_expand_tokens(t_token *tokens, t_env *env)
 {
 	t_token	*head;
 
@@ -62,7 +62,7 @@ int	ft_expand_tokens(t_token *tokens, char **envp)
 	{
 		if (tokens->type == TOKEN_WORD && tokens->flag_quote == Q_DOUBLE)
 		{
-			tokens->value = ft_expand_value(tokens->value, envp);
+			tokens->value = ft_expand_value(tokens->value, env);
 			if (tokens->value == NULL)
 				return (-1);
 		}

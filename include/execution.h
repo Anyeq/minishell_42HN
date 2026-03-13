@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:11:21 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 15:44:14 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 20:48:13 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_helper
 {
 	int		n_cmd;
-	char	**envp;
+	t_env	*env_list;
 }	t_helper;
 // Execution utils (execution_process_utils.c)
 int		ft_cmd_count(t_cmd *cmd);

@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 11:27:20 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/13 21:00:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-char	*ft_get_env_value(char **envp, char *key)
+char	*ft_get_env_value(t_env *envp, char *key)
 {
 	int	len;
 	int	i;
@@ -21,16 +21,16 @@ char	*ft_get_env_value(char **envp, char *key)
 	if (key == NULL)
 		return (NULL);
 	len = ft_strlen(key);
-	while (envp[i])
+	while (envp)
 	{
-		if (ft_strncmp(envp[i], key, len) == 0 && envp[i][len] == '=')
-			return (envp[i] + len + 1);
-		i++;
+		if (ft_strncmp(envp->key, key, len) == 0)
+			return (envp->value);
+		envp = envp->next;
 	}
 	return (NULL);
 }
 
-char	*ft_var_case(char **result, char *str, int *i, char **envp)
+char	*ft_var_case(char **result, char *str, int *i, t_env *envp)
 {
 	char	*key;
 	char	*val;
@@ -93,7 +93,7 @@ char	*ft_normal_case(char chr, char **result, int *i)
 	return (return_val);
 }
 
-char	*ft_home_case(char **result, char **envp, int *i)
+char	*ft_home_case(char **result, t_env *envp, int *i)
 {
 	char	*home;
 	char	*return_val;

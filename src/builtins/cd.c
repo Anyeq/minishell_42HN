@@ -6,11 +6,11 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:07:57 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/05 20:56:05 by eynaksho         ###   ########.fr       */
+/*   Updated: 2026/03/13 16:59:16 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 static void	set_env_value(t_shell *shell, char *key, char *value)
 {
