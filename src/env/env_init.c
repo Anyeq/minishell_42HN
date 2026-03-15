@@ -1,73 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_env_utils.c                                  :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/15 10:52:34 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/15 11:36:02 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
-
-static int	ft_prepare_key_value(t_env **node, const char *key,
-								 const char *value)
-{
-	(*node)->key = ft_strdup(key);
-	if ((*node)->key == NULL)
-	{
-		perror("minishell: malloc error");
-		return (-1);
-	}
-	if (value)
-	{
-		(*node)->value = ft_strdup(value);
-		if ((*node)->value == NULL)
-		{
-			free((*node)->key);
-			free(*node);
-			perror("minishell: malloc error");
-			return (-1);
-		}
-	}
-	return (0);
-}
-
-static t_env	*ft_env_new(const char *key, const char *value)
-{
-	t_env	*node;
-
-	node = malloc(sizeof(t_env));
-	if (ft_prepare_key_value(&node, key, value) == -1)
-		return (NULL);
-	if (node == NULL)
-	{
-		perror("minishell: malloc error");
-		return (NULL);
-	}
-	else
-		node->value = NULL;
-	node->next = NULL;
-	return (node);
-}
-
-static void	ft_add_env(t_env **env, t_env *new_node)
-{
-	t_env	*tmp;
-
-	tmp = *env;
-	if (*env == NULL)
-	{
-		*env = new_node;
-		return ;
-	}
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new_node;
-	return ;
-}
 
 static int	ft_split_key_value(const char *line, char **key, char **value)
 {
@@ -97,27 +40,24 @@ static int	ft_split_key_value(const char *line, char **key, char **value)
 	return (0);
 }
 
-static void	ft_clean_struct_env(t_env **env_list, int i, char **key,
-							   char **value)
+static t_env	*ft_prepare_new_env(char *envp, t_env **env_list,
+					char **key, char **value)
 {
-	t_env	*tmp;
-	t_env	*to_delete;
+	t_env	*new_env;
 
-	tmp = *env_list;
-	to_delete = tmp;
-	while (tmp)
+	new_env = NULL;
+	if (ft_split_key_value(envp, key, value))
 	{
-		tmp = tmp->next;
-		free(to_delete->key);
-		free((to_delete->value);
-		free((to_delete);
-		to_delete = tmp;
+		ft_clean_struct_env(env_list, key, value);
+		return (NULL);
 	}
-	free(*env_list);
-	free(*key);
-	free(*value);
-	*env_list = NULL;
-	return ;
+	new_env = ft_env_new(*key, *value);
+	if (new_env == NULL)
+	{
+		ft_clean_struct_env(env_list, key, value);
+		return (NULL);
+	}
+	return (new_env);
 }
 
 t_env	*ft_init_env(char **envp)
@@ -133,18 +73,10 @@ t_env	*ft_init_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_split_key_value(envp[i], &key, &value))
-		{
-			ft_clean_struct_env(&env_list, &key, &value);
-			return (NULL);
-		}
-		new_env = ft_env_new(key, value);
+		new_env = ft_prepare_new_env(envp[i], &env_list, &key, &value);
 		if (new_env == NULL)
-		{
-			ft_clean_struct_env(&env_list, &key, &value);
 			return (NULL);
-		}
-		ft_add_env(&env_list, new_env)
+		ft_add_env(&env_list, new_env);
 		free(key);
 		free(value);
 		i++;
