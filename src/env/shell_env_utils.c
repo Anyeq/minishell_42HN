@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/14 21:30:38 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/15 10:48:52 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static t_env	*ft_env_new(const char *key, const char *value)
 		perror("minishell: malloc error");
 		return (NULL);
 	}
-	}
 	else
 		node->value = NULL;
 	node->next = NULL;
@@ -87,12 +86,38 @@ static int	ft_split_key_value(const char *line, char **key, char **value)
 	{
 		*value = ft_strdup(line + i + 1);
 		free(*key);
-		perror("minishell: malloc error");
-		return (-1);
+		if (*value == NULL)
+		{
+			perror("minishell: malloc error");
+			return (-1);
+		}
 	}
 	else
 		*value = NULL;
 	return (0);
+}
+
+static void	ft_clean_struct_env(t_env **env_list, int i, char **key,
+							   char **value)
+{
+	t_env	*tmp;
+	t_env	*to_delete;
+
+	tmp = *env_list;
+	to_delete = tmp;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		free(to_delete->key);
+		free((to_delete->value);
+		free((to_delete);
+		to_delete = tmp;
+	}
+	free(*env_list);
+	free(*key);
+	free(*value);
+	*env_list = NULL;
+	return ;
 }
 
 t_env	*ft_init_env_list(char **envp)
@@ -110,11 +135,15 @@ t_env	*ft_init_env_list(char **envp)
 	{
 		if (ft_split_key_value(envp[i], &key, &value))
 		{
-			//TODO: Clean prior allocation
+			ft_clean_struct_env(&env_list, &key, &value);
 			return (NULL);
 		}
 		new_env = ft_env_new(key, value);
 		if (new_env == NULL)
+		{
+			ft_clean_struct_env(&env_list, &key, &value);
+			return (NULL);
+		}
 		ft_add_env(&env_list, new_env)
 		free(key);
 		free(value);
