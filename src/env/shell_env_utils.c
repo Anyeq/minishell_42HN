@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/15 10:48:52 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/15 10:52:34 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void	ft_clean_struct_env(t_env **env_list, int i, char **key,
 	return ;
 }
 
-t_env	*ft_init_env_list(char **envp)
+t_env	*ft_init_env(char **envp)
 {
 	t_env	*env_list;
 	t_env	*new_env;
