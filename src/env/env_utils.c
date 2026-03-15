@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 11:32:23 by asando            #+#    #+#             */
-/*   Updated: 2026/03/15 11:35:38 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/15 11:41:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,19 @@ void	ft_add_env(t_env **env, t_env *new_node)
 	return ;
 }
 
-void	ft_clean_struct_env(t_env **env_list, char **key, char **value)
+void	ft_clean_struct_env(t_env *env_list, char **key, char **value)
 {
 	t_env	*tmp;
-	t_env	*to_delete;
 
-	tmp = *env_list;
-	to_delete = tmp;
+	tmp = env_list;
 	while (tmp)
 	{
 		tmp = tmp->next;
-		free(to_delete->key);
-		free((to_delete->value);
-		free((to_delete);
-		to_delete = tmp;
+		free(env_list->key);
+		free((env_list->value);
+		free((env_list);
 	}
-	free(*env_list);
 	free(*key);
 	free(*value);
-	*env_list = NULL;
 	return ;
 }
