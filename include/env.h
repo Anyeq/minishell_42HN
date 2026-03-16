@@ -6,14 +6,14 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:01:19 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/16 18:30:40 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:01:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include <unistd>
+# include <unistd.h>
 # include "libft.h"
 # include "stdlib.h"
 

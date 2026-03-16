@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/16 21:52:32 by asando           ###   ########.fr        #
+#    Updated: 2026/03/16 22:02:59 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRC_FILE_ENV := $(addprefix $(SRC_ENV_DIR)/, $(FILE_ENV))
 FILE_BUILTIN := builtin.c cd.c echo.c env.c export.c pwd.c unset.c
 SRC_FILE_BUILTIN := $(addprefix $(SRC_BUILTIN_DIR)/, $(FILE_BUILTIN))
 
-SRC_MAIN := main.c
+SRC_MAIN := $(SRC_DIR)/main.c
 
 SRCS := $(SRC_FILE_LEXER) $(SRC_FILE_PARSE) $(SRC_FILE_EXPANSION) \
 		$(SRC_FILE_EXECUTION) $(SRC_FILE_MINISHELL_MAIN) $(SRC_FILE_ENV) \
@@ -94,7 +94,7 @@ OBJ_FILE_MINISHELL_MAIN := $(SRC_FILE_MINISHELL_MAIN:$(SRC_MINISHELL_MAIN_DIR)/\
 						   %.c=$(OBJ_MINISHELL_MAIN_DIR)/%.o)
 OBJ_FILE_ENV := $(SRC_FILE_ENV:$(SRC_ENV_DIR)/%.c=$(OBJ_ENV_DIR)/%.o)
 OBJ_FILE_BUILTIN := $(SRC_FILE_BUILTIN:$(SRC_BUILTIN_DIR)/%.c=$(OBJ_BUILTIN_DIR)/%.o)
-OBJ_MAIN := main.o
+OBJ_MAIN := $(OBJ_DIR)/main.o
 
 OBJS := $(OBJ_MAIN) $(OBJ_FILE_LEXER) $(OBJ_FILE_PARSE) $(OBJ_FILE_EXPANSION) \
 		$(OBJ_FILE_EXECUTION) $(OBJ_FILE_MINISHELL_MAIN) $(OBJ_FILE_ENV) \

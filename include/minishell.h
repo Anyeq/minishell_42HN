@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:54:25 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 19:13:30 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:00:45 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "lexer.h"
 # include "parse.h"
-# include "exepansion.h"
+# include "expansion.h"
 # include "execution.h"
 # include "env.h"
 # include "builtin.h"
