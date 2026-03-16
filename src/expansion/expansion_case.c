@@ -6,29 +6,11 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 21:00:27 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 17:08:59 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-
-char	*ft_get_env_value(t_env *envp, char *key)
-{
-	int	len;
-	int	i;
-
-	i = 0;
-	if (key == NULL)
-		return (NULL);
-	len = ft_strlen(key);
-	while (envp)
-	{
-		if (ft_strncmp(envp->key, key, len) == 0)
-			return (envp->value);
-		envp = envp->next;
-	}
-	return (NULL);
-}
 
 char	*ft_var_case(char **result, char *str, int *i, t_env *envp)
 {
@@ -42,7 +24,7 @@ char	*ft_var_case(char **result, char *str, int *i, t_env *envp)
 	while (ft_isalnum(str[*i]) || str[*i] == '_')
 		*i = *i + 1;
 	key = ft_substr(str, start, *i - start);
-	val = ft_get_env_value(envp, key);
+	val = get_env_value(envp, key);
 	if (val)
 		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
@@ -98,7 +80,7 @@ char	*ft_home_case(char **result, t_env *envp, int *i)
 	char	*home;
 	char	*return_val;
 
-	home = ft_get_env_value(envp, "HOME");
+	home = get_env_value(envp, "HOME");
 	if (home == NULL)
 		return_val = ft_join_and_free(*result, ft_strdup("~"));
 	else

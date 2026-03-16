@@ -46,9 +46,16 @@ void	free_env_list(t_env *head)
 
 char	*get_env_value(t_env *env, char *key)
 {
+	int	len;
+	int	i;
+
+	i = 0;
+	if (key == NULL)
+		return (NULL);
+	len = ft_strlen(key);
 	while (env)
 	{
-		if (ft_strncmp(env->key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strncmp(env->key, key, len + 1) == 0)
 			return (env->value);
 		env = env->next;
 	}

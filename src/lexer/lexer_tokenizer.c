@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 14:36:27 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 19:18:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 16:54:31 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_add_token(t_token **token_list, t_token *new_token)
 {
 	t_token	*tmp;
 
+	if (token_list == NULL || new_token == NULL)
+		return ;
 	if (*token_list == NULL)
 	{
 		*token_list = new_token;
