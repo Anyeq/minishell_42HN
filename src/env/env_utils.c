@@ -6,12 +6,14 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 11:32:23 by asando            #+#    #+#             */
-/*   Updated: 2026/03/15 11:41:32 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 18:52:49 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
+
 static int	ft_prepare_key_value(t_env **node, const char *key,
-								 const char *value)
+								const char *value)
 {
 	(*node)->key = ft_strdup(key);
 	if ((*node)->key == NULL)
@@ -78,8 +80,8 @@ void	ft_clean_struct_env(t_env *env_list, char **key, char **value)
 	{
 		tmp = tmp->next;
 		free(env_list->key);
-		free((env_list->value);
-		free((env_list);
+		free(env_list->value);
+		free(env_list);
 	}
 	free(*key);
 	free(*value);
