@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:06:14 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 11:20:40 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:51:57 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ static void	ft_quote_found(char *str, int *i, int *j, char *result)
 }
 
 //NOTE: Memmory allocation allocate with quote (inefficient)
-static char	*ft_strip_quote(char *str)
+static char	*ft_strip_quotes(char *str)
 {
 	char	*result;
 	int		i;
 	int		j;
-	char	c;
 
 	i = 0;
 	j = 0;

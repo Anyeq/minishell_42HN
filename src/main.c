@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 19:26:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 19:12:16 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:35:34 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	helper.envp = ft_init_env_list(envp);
-	if (helper.envp == NULL)
+	helper.env_list = ft_init_env(envp);
+	if (helper.env_list == NULL)
 	{
 		perror("minishell: malloc error");
-		return (NULL);
+		return (-1);
 	}
 	minishell_loop(&helper);
-	free(helper.envp);
+	free(helper.env_list);
 	return (0);
 }

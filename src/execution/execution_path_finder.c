@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:56:32 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 15:47:18 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 23:12:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*ft_strjoin3(char *str1, char *str2, char *str3)
 		perror("minishell: malloc error");
 		return (NULL);
 	}
-	res = ft_strjoin(tmp, res);
+	res = ft_strjoin(tmp, str3);
 	if (res == NULL)
 		perror("minishell: malloc error");
 	free (tmp);

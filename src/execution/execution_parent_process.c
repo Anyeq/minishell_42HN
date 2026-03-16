@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:35:13 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 15:43:36 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 23:20:06 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static int	ft_wait_children_process(pid_t *pids, int n_cmd)
 {
 	int	status;
 	int	last_process_status;
+	int	i;
 
+	i = 0;
 	status = 0;
 	last_process_status = 0;
 	while (i < n_cmd)

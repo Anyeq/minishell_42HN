@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:11:21 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 20:48:13 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 23:00:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 # include "lexer.h"
 # include "parse.h"
 # include "libft.h"
+# include "env.h"
+# include "expansion.h"
+# include "signalmnshell.h"
+# include "builtin.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>

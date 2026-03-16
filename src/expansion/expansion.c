@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 20:56:17 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:32:28 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ static char	*ft_expand_value(char *value, t_env *envp)
 {
 	char	*result;
 	int		i;
-	char	*home;
 
-	home = NULL;
 	i = 0;
 	result = ft_strdup("");
 	if (result == NULL)

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:46:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 08:39:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:19:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_read_quote(char *input, int i, t_token **token_list)
 	start = i + 1;
 	if (input[i] == '\'')
 		quote = Q_SINGLE;
-	else if (input[i] == '"')
+	else
 		quote = Q_DOUBLE;
 	i++;
 	while (input[i] && !ft_is_quote(input[i]))

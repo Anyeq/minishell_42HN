@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/16 22:02:59 by asando           ###   ########.fr        #
+#    Updated: 2026/03/16 22:49:09 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_FILE_LEXER := $(addprefix $(SRC_LEXER_DIR)/, $(FILE_LEXER))
 FILE_PARSE := parse.c parse_cmd.c parse_free_function.c parse_utils.c
 SRC_FILE_PARSE := $(addprefix $(SRC_PARSE_DIR)/, $(FILE_PARSE))
 
-FILE_EXPANSION := expansion.c expansion_case.c expansion_handle_quote.c \
+FILE_EXPANSION := expansion.c expansion_case.c expansion_handle_quotes.c \
 				  expansion_utils.c
 SRC_FILE_EXPANSION := $(addprefix $(SRC_EXPANSION_DIR)/, $(FILE_EXPANSION))
 
@@ -86,12 +86,12 @@ OBJ_SUBDIR := $(OBJ_LEXER_DIR) $(OBJ_PARSE_DIR) $(OBJ_EXPANSION_DIR) \
 
 OBJ_FILE_LEXER := $(SRC_FILE_LEXER:$(SRC_LEXER_DIR)/%.c=$(OBJ_LEXER_DIR)/%.o)
 OBJ_FILE_PARSE := $(SRC_FILE_PARSE:$(SRC_PARSE_DIR)/%.c=$(OBJ_PARSE_DIR)/%.o)
-OBJ_FILE_EXPANSION := $(SRC_FILE_EXPANSION:$(SRC_EXPANSION_DIR)/%.c=\
-					  $(OBJ_EXPANSION_DIR)/%.o)
+OBJ_FILE_EXPANSION := \
+	$(SRC_FILE_EXPANSION:$(SRC_EXPANSION_DIR)/%.c=$(OBJ_EXPANSION_DIR)/%.o)
 OBJ_FILE_EXECUTION := $(SRC_FILE_EXECUTION:$(SRC_EXECUTION_DIR)/%.c=\
 					  $(OBJ_EXECUTION_DIR)/%.o)
-OBJ_FILE_MINISHELL_MAIN := $(SRC_FILE_MINISHELL_MAIN:$(SRC_MINISHELL_MAIN_DIR)/\
-						   %.c=$(OBJ_MINISHELL_MAIN_DIR)/%.o)
+OBJ_FILE_MINISHELL_MAIN := \
+	$(SRC_FILE_MINISHELL_MAIN:$(SRC_MINISHELL_MAIN_DIR)/%.c=$(OBJ_MINISHELL_MAIN_DIR)/%.o)
 OBJ_FILE_ENV := $(SRC_FILE_ENV:$(SRC_ENV_DIR)/%.c=$(OBJ_ENV_DIR)/%.o)
 OBJ_FILE_BUILTIN := $(SRC_FILE_BUILTIN:$(SRC_BUILTIN_DIR)/%.c=$(OBJ_BUILTIN_DIR)/%.o)
 OBJ_MAIN := $(OBJ_DIR)/main.o
@@ -114,7 +114,7 @@ $(LIBFT):
 	@$(MAKE) --no-print-directory bonus -C $(LIBFT_DIR)
 	@echo "libft.a is compiled"
 
-$(OBJ_MAIN): $(SRC_MAIN)
+$(OBJ_MAIN): $(SRC_MAIN) | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_LEXER_DIR)/%.o: $(SRC_LEXER_DIR)/%.c | $(OBJ_LEXER_DIR)

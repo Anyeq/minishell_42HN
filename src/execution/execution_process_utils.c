@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:25:06 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 11:44:27 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 23:19:00 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	ft_close_pipes(int n, int **pipes)
 		return ;
 	while (i < n)
 	{
-		close(pipes[i]);
+		close(pipes[i][0]);
+		close(pipes[i][1]);
 		i++;
 	}
 	return ;

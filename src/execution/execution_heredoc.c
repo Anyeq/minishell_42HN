@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 13:55:38 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 12:55:07 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 23:11:15 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_write_line(int fd, const char *line)
 {
-	size_t	line_size;
+	ssize_t	line_size;
 
 	line_size = ft_strlen(line);
 	if (write(fd, line, line_size) < line_size)

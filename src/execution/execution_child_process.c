@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/14 20:54:27 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 23:09:54 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ static void	ft_child_process(t_cmd *cmd, int i, t_helper *helper, int **pipes)
 	char	**envp;
 
 	ft_prepare_pipe(pipes, i, helper);
-	envp = ft_create_envp(helper->env);
+	envp = ft_create_envp(helper->env_list);
 	if (envp == NULL)
 		exit(1);
 	ft_redirection_function(cmd->redirs);
 	if (ft_is_builtin(cmd->args[0]))
 	{
-		ft_exec_builtin(cmd->args, envp);
+		//ft_exec_builtin(cmd, envp);
 		exit(0);
 	}
 	execve(ft_find_path(cmd->args[0]), cmd->args, envp);
@@ -82,7 +82,7 @@ int	ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids,
 		}
 		if (pids[i] == 0)
 		{
-			ft_setup_signals_child(void);
+			ft_setup_signals_child();
 			ft_child_process(cmd, i, helper, pipes);
 		}
 		cmd = cmd->next_cmd;

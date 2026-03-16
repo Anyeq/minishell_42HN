@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 15:53:00 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 22:54:03 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_init_variable(int *fork_s, int ***pipes, t_helper *helper,
 				pid_t **pids)
 {
 	*fork_s = 0;
-	pipes = NULL;
+	*pipes = NULL;
 	*pids = malloc(sizeof(pid_t) * helper->n_cmd);
 	if (pids == NULL)
 	{
@@ -36,7 +36,6 @@ static int	ft_init_variable(int *fork_s, int ***pipes, t_helper *helper,
 
 void	ft_executor(t_cmd **pipeline, t_helper *helper)
 {
-	int		n_cmd;
 	int		**pipes;
 	pid_t	*pids;
 	int		fork_status;
