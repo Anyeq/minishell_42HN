@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "builtin.h"
 
 static int	is_valid_identifier(char *str)
 {
@@ -18,6 +18,8 @@ static int	is_valid_identifier(char *str)
 	return (1);
 }
 
+//TODO: change add_env_node with a new one
+//TODO: restructuring the function
 static void	set_env_var(t_shell *shell, char *key, char *value)
 {
 	t_env	*env;
@@ -78,7 +80,7 @@ int	builtin_export(t_cmd *cmd, t_shell *shell)
 			ret = 1;
 		}
 		else
-			export_var(shell, cmd->args[i]);
+			ret = export_var(shell, cmd->args[i]);
 		i++;
 	}
 	return (ret);

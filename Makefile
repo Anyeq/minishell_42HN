@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/16 16:46:57 by asando           ###   ########.fr        #
+#    Updated: 2026/03/16 18:45:04 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC_PARSE_DIR := $(SRC_DIR)/parse
 SRC_EXPANSION_DIR := $(SRC_DIR)/expansion
 SRC_EXECUTION_DIR := $(SRC_DIR)/execution
 SRC_MINISHELL_MAIN_DIR := $(SRC_DIR)/minishell_main
+SRC_ENV_DIR := $(SRC_DIR)/env
+SRC_BUILTIN_DIR := $(SRC_DIR)/builtins
 
 FILE_LEXER := lexer.c lexer_read.c lexer_tokenizer.c lexer_utils.c
 SRC_FILE_LEXER := $(addprefix $(SRC_LEXER_DIR)/, $(FILE_LEXER))
@@ -52,8 +54,15 @@ FILE_MINISHELL_MAIN := main_loop.c signal.c
 SRC_FILE_MINISHELL_MAIN := $(addprefix $(SRC_MINISHELL_MAIN_DIR)/, \
 						   $(FILE_MINISHELL_MAIN))
 
+FILE_ENV := env.c env_convert_str.c env_init.c env_utils.c
+SRC_FILE_ENV := $(addprefix $(SRC_ENV_DIR)/, $(FILE_ENV))
+
+FILE_BUILTIN := builtin.c cd.c echo.c env.c export.c pwd.c unset.c
+SRC_FILE_BUILTIN := $(addprefix $(SRC_BUILTIN_DIR)/, $(FILE_BUILTIN))
+
 SRCS := $(SRC_FILE_LEXER) $(SRC_FILE_PARSE) $(SRC_FILE_EXPANSION) \
-		$(SRC_FILE_EXECUTION) $(SRC_FILE_MINISHELL_MAIN)
+		$(SRC_FILE_EXECUTION) $(SRC_FILE_MINISHELL_MAIN) $(SRC_FILE_ENV) \
+		$(SRC_FILE_BUILTIN)
 
 #==============================================================================
 # OBJECTS
@@ -65,9 +74,12 @@ OBJ_PARSE_DIR := $(OBJ_DIR)/parse_obj
 OBJ_EXPANSION_DIR := $(OBJ_DIR)/expansion_obj
 OBJ_EXECUTION_DIR := $(OBJ_DIR)/execution_obj
 OBJ_MINISHELL_MAIN_DIR := $(OBJ_DIR)/minishell_main_obj
+OBJ_ENV_DIR := $(OBJ_DIR)/env_obj
+OBJ_BUILTIN_DIR := $(OBJ_DIR)/builtins_obj
 
 OBJ_SUBDIR := $(OBJ_LEXER_DIR) $(OBJ_PARSE_DIR) $(OBJ_EXPANSION_DIR) \
-			  $(OBJ_EXECUTION_DIR) $(OBJ_MINISHELL_MAIN_DIR)
+			  $(OBJ_EXECUTION_DIR) $(OBJ_MINISHELL_MAIN_DIR) $(OBJ_ENV_DIR) \
+			  $(OBJ_BUILTIN_DIR)
 
 OBJ_FILE_LEXER := $(SRC_FILE_LEXER:$(SRC_LEXER_DIR)/%.c=$(OBJ_LEXER_DIR)/%.o)
 OBJ_FILE_PARSE := $(SRC_FILE_PARSE:$(SRC_PARSE_DIR)/%.c=$(OBJ_PARSE_DIR)/%.o)
@@ -77,8 +89,12 @@ OBJ_FILE_EXECUTION := $(SRC_FILE_EXECUTION:$(SRC_EXECUTION_DIR)/%.c=\
 					  $(OBJ_EXECUTION_DIR)/%.o)
 OBJ_FILE_MINISHELL_MAIN := $(SRC_FILE_MINISHELL_MAIN:$(SRC_MINISHELL_MAIN_DIR)/\
 						   %.c=$(OBJ_MINISHELL_MAIN_DIR)/%.o)
+OBJ_FILE_ENV := $(SRC_FILE_ENV:$(SRC_ENV_DIR)/%.c=$(OBJ_ENV_DIR)/%.o)
+OBJ_FILE_BUILTIN := $(SRC_FILE_BUILTIN:$(SRC_BUILTIN_DIR)/%.c=$(OBJ_BUILTIN_DIR)/%.o)
+
 OBJS := $(OBJ_FILE_LEXER) $(OBJ_FILE_PARSE) $(OBJ_FILE_EXPANSION) \
-		$(OBJ_FILE_EXECUTION) $(OBJ_FILE_MINISHELL_MAIN)
+		$(OBJ_FILE_EXECUTION) $(OBJ_FILE_MINISHELL_MAIN) $(OBJ_FILE_ENV) \
+		$(OBJ_FILE_BUILTIN)
 
 #==============================================================================
 # RULES
@@ -103,6 +119,12 @@ $(OBJ_EXPANSION_DIR)/%.o: $(SRC_EXPANSION_DIR)/%.c | $(OBJ_EXPANSION_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_EXECUTION_DIR)/%.o: $(SRC_EXECUTION_DIR)/%.c | $(OBJ_EXECUTION_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_ENV_DIR)/%.o: $(SRC_ENV_DIR)/%.c | $(OBJ_ENV_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_BUILTIN_DIR)/%.o: $(SRC_BUILTIN_DIR)/%.c | $(OBJ_BUILTIN_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_MINISHELL_MAIN_DIR)/%.o: $(SRC_MINISHELL_MAIN_DIR)/%.c | \

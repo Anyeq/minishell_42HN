@@ -42,6 +42,7 @@ void	free_env_list(t_env *head)
 		free(temp->value);
 		free(temp);
 	}
+	return ;
 }
 
 char	*get_env_value(t_env *env, char *key)

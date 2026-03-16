@@ -6,11 +6,11 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:40:25 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/05 21:40:26 by eynaksho         ###   ########.fr       */
+/*   Updated: 2026/03/16 18:29:19 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "builtin.h"
 
 static int	check_n_flag(char *arg)
 {

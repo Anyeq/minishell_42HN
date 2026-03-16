@@ -6,14 +6,16 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:01:19 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/05 20:56:05 by eynaksho         ###   ########.fr       */
+/*   Updated: 2026/03/16 18:30:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include "minishell.h"
+# include <unistd>
+# include "libft.h"
+# include "stdlib.h"
 
 typedef struct s_env
 {
@@ -30,4 +32,10 @@ typedef struct s_shell
 	char	*input;
 }	t_shell;
 
+t_env	*create_env_node(char *key, char *value);
+void	add_env_node(t_env **head, t_env *new_node);
+void	free_env_list(t_env *head);
+char	*get_env_value(t_env *envp, char *key);
+char	**ft_create_envp(t_env *env);
+t_env	*ft_init_env(char **envp);
 #endif

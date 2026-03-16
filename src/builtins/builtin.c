@@ -6,11 +6,11 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:40:35 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/13 12:59:54 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/16 18:26:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
 int	ft_is_builtin(char *cmd)
 {

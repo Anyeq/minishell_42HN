@@ -6,11 +6,11 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:40:30 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/05 21:40:31 by eynaksho         ###   ########.fr       */
+/*   Updated: 2026/03/16 18:28:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "builtin.h"
 
 int	builtin_pwd(void)
 {
