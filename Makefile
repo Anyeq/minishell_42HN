@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/16 18:51:30 by asando           ###   ########.fr        #
+#    Updated: 2026/03/16 21:52:32 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIBFT_DIR := ./lib/libft
 LIBFT_HEADER := $(LIBFT_DIR)/includes
 LIBFT := $(LIBFT_DIR)/libft.a
 CFLAGS := -Wall -Wextra -Werror -I$(HEADER) -I$(LIBFT_HEADER)
+RDLINEFLAGS := -lreadline
 
 #==============================================================================
 # SOURCES
@@ -60,6 +61,8 @@ SRC_FILE_ENV := $(addprefix $(SRC_ENV_DIR)/, $(FILE_ENV))
 FILE_BUILTIN := builtin.c cd.c echo.c env.c export.c pwd.c unset.c
 SRC_FILE_BUILTIN := $(addprefix $(SRC_BUILTIN_DIR)/, $(FILE_BUILTIN))
 
+SRC_MAIN := main.c
+
 SRCS := $(SRC_FILE_LEXER) $(SRC_FILE_PARSE) $(SRC_FILE_EXPANSION) \
 		$(SRC_FILE_EXECUTION) $(SRC_FILE_MINISHELL_MAIN) $(SRC_FILE_ENV) \
 		$(SRC_FILE_BUILTIN)
@@ -91,8 +94,9 @@ OBJ_FILE_MINISHELL_MAIN := $(SRC_FILE_MINISHELL_MAIN:$(SRC_MINISHELL_MAIN_DIR)/\
 						   %.c=$(OBJ_MINISHELL_MAIN_DIR)/%.o)
 OBJ_FILE_ENV := $(SRC_FILE_ENV:$(SRC_ENV_DIR)/%.c=$(OBJ_ENV_DIR)/%.o)
 OBJ_FILE_BUILTIN := $(SRC_FILE_BUILTIN:$(SRC_BUILTIN_DIR)/%.c=$(OBJ_BUILTIN_DIR)/%.o)
+OBJ_MAIN := main.o
 
-OBJS := $(OBJ_FILE_LEXER) $(OBJ_FILE_PARSE) $(OBJ_FILE_EXPANSION) \
+OBJS := $(OBJ_MAIN) $(OBJ_FILE_LEXER) $(OBJ_FILE_PARSE) $(OBJ_FILE_EXPANSION) \
 		$(OBJ_FILE_EXECUTION) $(OBJ_FILE_MINISHELL_MAIN) $(OBJ_FILE_ENV) \
 		$(OBJ_FILE_BUILTIN)
 
@@ -104,10 +108,14 @@ NAME := minishell
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS) $(RDLINEFLAGS) -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) --no-print-directory bonus -C $(LIBFT_DIR)
 	@echo "libft.a is compiled"
+
+$(OBJ_MAIN): $(SRC_MAIN)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_LEXER_DIR)/%.o: $(SRC_LEXER_DIR)/%.c | $(OBJ_LEXER_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
