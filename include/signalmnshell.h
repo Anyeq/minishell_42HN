@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 15:27:16 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 19:02:30 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 19:27:41 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <signal.h>
 # include <unistd.h>
+# include <stdio.h>
+# include "expansion.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 

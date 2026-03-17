@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 18:49:35 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 18:49:45 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 19:34:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ void	free_env_list(t_env *head)
 char	*get_env_value(t_env *env, char *key)
 {
 	int	len;
-	int	i;
 
-	i = 0;
 	if (key == NULL)
 		return (NULL);
 	len = ft_strlen(key);

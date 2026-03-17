@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:02:27 by asando            #+#    #+#             */
-/*   Updated: 2026/03/08 14:02:19 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 19:25:48 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	ft_free_pipeline(t_cmd **cmd);
 void	ft_parse_error(t_cmd **pipeline);
 
 //Parse loop
-t_cmd	*parse_loop(t_token *tokens);
+t_cmd	*ft_parse_loop(t_token *tokens);
 
 #endif

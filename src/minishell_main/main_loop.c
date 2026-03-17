@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_main_loop.c                              :+:      :+:    :+:   */
+/*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 16:46:11 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 19:25:47 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token	*ft_create_tokens(t_token **tokens)
+static int	ft_create_tokens(t_token **tokens)
 {
 	char	*line;
 
@@ -45,7 +45,7 @@ static int	ft_prepare_tokens(t_token **tokens, t_helper *helper)
 	status = ft_create_tokens(tokens);
 	if (status != 42)
 		return (status);
-	if (ft_expand_tokens(*tokens, helper->envp) == -1)
+	if (ft_expand_tokens(*tokens, helper->env_list) == -1)
 	{
 		ft_free_token_list(tokens);
 		return (0);
@@ -53,23 +53,23 @@ static int	ft_prepare_tokens(t_token **tokens, t_helper *helper)
 	return (42);
 }
 
-static int	ft_prepare_cmd(t_tokens **tokens, t_cmd **pipeline)
+static int	ft_prepare_cmd(t_token **tokens, t_cmd **pipeline)
 {
-	*pipeline = ft_parse(*tokens);
+	*pipeline = ft_parse_loop(*tokens);
 	if (pipeline == NULL)
 	{
 		ft_free_token_list(tokens);
 		return (-1);
 	}
 	ft_free_token_list(tokens);
-	ft_setup_signals_heredoc(void);
+	ft_setup_signals_heredoc();
 	if (ft_prepare_heredoc(*pipeline) == -1)
 	{
-		ft_setup_signals_shell(void);
+		ft_setup_signals_shell();
 		ft_free_pipeline(pipeline);
 		return (-1);
 	}
-	ft_setup_signals_shell(void);
+	ft_setup_signals_shell();
 	return (0);
 }
 
@@ -79,7 +79,7 @@ void	minishell_loop(t_helper *helper)
 	t_cmd	*pipeline;
 	int		status;
 
-	ft_setup_signals_shell(void);
+	ft_setup_signals_shell();
 	while (1)
 	{
 		status = ft_prepare_tokens(&tokens, helper);

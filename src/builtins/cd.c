@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:07:57 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/16 18:32:12 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 20:41:14 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	set_env_value(t_shell *shell, char *key, char *value)
 {
 	t_env	*env;
-	t_env	*new_node;
+	//t_env	*new_node;
 
 	env = shell->env;
 	while (env)

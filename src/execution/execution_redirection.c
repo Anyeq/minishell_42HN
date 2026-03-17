@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:19:36 by asando            #+#    #+#             */
-/*   Updated: 2026/02/08 14:12:49 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 19:17:36 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static void	ft_open_failed(char *filename, int fd)
 {
 	if (fd == -1)
 	{
-		perror(redirs->filename);
+		perror(filename);
 		exit(1);
 	}
 	return ;
 }
 
-static void	ft_redir_no_heredoc(t_token_type type)
+static void	ft_redir_no_heredoc(t_redir *redirs)
 {
 	int	fd;
 
@@ -56,7 +56,7 @@ void	ft_redirection_function(t_redir *redirs)
 	{
 		if (redirs->type == TOKEN_REDIR_IN || redirs->type == TOKEN_REDIR_OUT
 			|| redirs->type == TOKEN_APPEND)
-			ft_redir_no_heredoc(redirs->type);
+			ft_redir_no_heredoc(redirs);
 		else if (redirs->type == TOKEN_HEREDOC)
 		{
 			dup2(redirs->fd, STDIN_FILENO);
