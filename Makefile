@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/16 22:49:09 by asando           ###   ########.fr        #
+#    Updated: 2026/03/17 21:31:07 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ NAME := minishell
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(RDLINEFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(RDLINEFLAGS) -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) --no-print-directory bonus -C $(LIBFT_DIR)
