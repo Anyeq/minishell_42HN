@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 23:09:54 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 16:57:03 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_child_process(t_cmd *cmd, int i, t_helper *helper, int **pipes)
 	ft_redirection_function(cmd->redirs);
 	if (ft_is_builtin(cmd->args[0]))
 	{
-		//ft_exec_builtin(cmd, envp);
+		ft_exec_builtin(cmd, envp);
 		exit(0);
 	}
 	execve(ft_find_path(cmd->args[0]), cmd->args, envp);
