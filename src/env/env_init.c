@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 16:52:35 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 18:09:44 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,25 @@ t_env	*ft_init_env(char **envp)
 		i++;
 	}
 	return (env_list);
+}
+
+int	ft_shell_init(t_shell *shell, char **envp)
+{
+	shell->env = ft_init_env(envp);
+	if (shell->env == NULL)
+	{
+		perror("minishell: malloc error");
+		return (-1);
+	}
+	shell->n_cmd = 0;
+	shell->exit_status = 0;
+	shell->input = NULL;
+	shell->cmds = NULL;
+	return (0);
+}
+
+void	ft_shell_destroy(t_shell *shell)
+{
+	ft_clean_struct_env(shell->env);
+	return ;
 }

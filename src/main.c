@@ -6,27 +6,21 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 19:26:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 16:52:36 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 17:49:36 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_exit_status = 0;
-
 int	main(int argc, char **argv, char **envp)
 {
-	t_helper	helper;
+	t_shell	shell;
 
 	(void)argc;
 	(void)argv;
-	helper.env_list = ft_init_env(envp);
-	if (helper.env_list == NULL)
-	{
-		perror("minishell: malloc error");
-		return (-1);
-	}
-	minishell_loop(&helper);
-	free(helper.env_list);
+	if (ft_shell_init(&shell, envp) == -1)
+		return (1);
+	shell_loop(&shell);
+	ft_shell_destoy(&shell);
 	return (0);
 }

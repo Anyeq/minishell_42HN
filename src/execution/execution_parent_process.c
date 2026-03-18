@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 11:35:13 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 23:20:06 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 18:35:33 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ static int	ft_get_exit_status(int exit_status)
 	return (1);
 }
 
-void	ft_parent_process(int **pipes, pid_t *pids, int n_cmd)
+void	ft_parent_process(t_shell *shell, int **pipes, pid_t *pids, int n_cmd)
 {
 	int	status;
 
 	ft_close_pipes(n_cmd - 1, pipes);
 	status = ft_wait_children_process(pids, n_cmd);
-	g_exit_status = ft_get_exit_status(status);
+	shell->exit_status = ft_get_exit_status(status);
 	return ;
 }

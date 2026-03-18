@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:11:21 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 17:16:35 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 18:42:01 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 
-typedef struct s_helper
-{
-	int		n_cmd;
-	t_env	*env_list;
-}	t_helper;
 // Execution utils (execution_process_utils.c)
 int		ft_cmd_count(t_cmd *cmd);
 void	ft_clean_pipe_allocation(int n, int **address);
@@ -47,11 +42,11 @@ int		ft_prepare_heredoc(t_cmd *pipeline);
 char	*ft_find_path(char *path);
 
 // Parent process function (execution_parent_process.c)
-void	ft_parent_process(int **pipes, pid_t *pids, int n_cmd);
+void	ft_parent_process(t_shell *shell, int **pipes, pid_t *pids, int n_cmd);
 
 // Child process function (execution_child_process.c)
-int		ft_create_child_process(t_cmd *cmd, t_helper *helper, int *pids, int **pipes);
+int		ft_create_child_process(t_shell *shell, int *pids, int **pipes);
 
 // Main function in execution (execution_executor.c)
-void	ft_executor(t_cmd **pipeline, t_helper *helper);
+void	ft_executor(t_shell *shell);
 #endif

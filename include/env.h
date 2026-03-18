@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:01:19 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/17 20:37:51 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 17:30:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_shell
 	t_cmd	*cmds;
 	int		exit_status;
 	char	*input;
+	int		n_cmd;
 }	t_shell;
 
 t_env	*create_env_node(char *key, char *value);

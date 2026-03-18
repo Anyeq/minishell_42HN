@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:54:25 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 22:33:36 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 17:49:59 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-void	minishell_loop(t_helper *helper);
+void	shell_loop(t_shell *shell);
 
 #endif

@@ -6,46 +6,45 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 16:37:19 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 18:22:10 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_create_tokens(t_token **tokens)
+static int	ft_create_tokens(t_token **tokens, t_shell *shell)
 {
-	char	*line;
-
-	line = readline("minishell$ ");
-	if (line == NULL)
+	shell->input = readline("minishell$ ");
+	if (shell->input == NULL)
 	{
 		printf("exit\n");
 		return (-1);
 	}
-	if (*line == '\0')
+	if (*(shell->input) == '\0')
 	{
-		free(line);
+		free(shell->input);
 		return (0);
 	}
-	add_history(line);
-	*tokens = ft_lexer_loop(line);
+	add_history(shell->input);
+	*tokens = ft_lexer_loop(shell->input);
 	if (*tokens == NULL)
 	{
-		free(line);
+		free(shell->input);
 		return (0);
 	}
-	free(line);
+	free(shell->input);
+	shell->input = NULL;
 	return (42);
 }
 
-static int	ft_prepare_tokens(t_token **tokens, t_helper *helper)
+static int	ft_prepare_tokens(t_token **tokens, t_helper *shell)
 {
 	int	status;
 
-	status = ft_create_tokens(tokens);
+	status = ft_create_tokens(tokens, shell);
 	if (status != 42)
 		return (status);
-	if (ft_expand_tokens(*tokens, helper->env_list) == -1)
+	if (ft_expand_tokens(*tokens, shell->env) == -1)
 	{
 		ft_free_token_list(tokens);
 		return (0);
@@ -73,24 +72,23 @@ static int	ft_prepare_cmd(t_token **tokens, t_cmd **pipeline)
 	return (0);
 }
 
-void	minishell_loop(t_helper *helper)
+void	shell_loop(t_helper *shell)
 {
 	t_token	*tokens;
-	t_cmd	*pipeline;
 	int		status;
 
 	ft_setup_signals_shell();
 	while (1)
 	{
-		status = ft_prepare_tokens(&tokens, helper);
+		status = ft_prepare_tokens(&tokens, shell);
 		if (status == 0)
 			continue ;
 		else if (status == -1)
 			break ;
-		if (ft_prepare_cmd(&tokens, &pipeline))
+		if (ft_prepare_cmd(&tokens, &(shell->cmds)))
 			continue ;
-		ft_executor(&pipeline, helper);
-		ft_free_pipeline(&pipeline);
+		ft_executor(shell);
+		ft_free_pipeline(&(shell->cmds));
 	}
 	return ;
 }
