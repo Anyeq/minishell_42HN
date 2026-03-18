@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/15 11:42:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 16:52:35 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static int	ft_split_key_value(const char *line, char **key, char **value)
 	if (line[i] == '=')
 	{
 		*value = ft_strdup(line + i + 1);
-		free(*key);
 		if (*value == NULL)
 		{
 			perror("minishell: malloc error");
+			free(*key);
 			return (-1);
 		}
 	}
