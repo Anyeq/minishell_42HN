@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 18:50:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 18:50:47 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:30:54 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static int	is_valid_identifier(char *str)
 	return (1);
 }
 
-//TODO: change add_env_node with a new one
-//TODO: restructuring the function
 static void	set_env_var(t_shell *shell, char *key, char *value)
 {
 	t_env	*env;

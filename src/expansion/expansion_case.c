@@ -6,13 +6,13 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 17:08:59 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:07:08 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-char	*ft_var_case(char **result, char *str, int *i, t_env *envp)
+char	*ft_var_case(char **result, char *str, int *i, t_shell *shell)
 {
 	char	*key;
 	char	*val;
@@ -24,7 +24,7 @@ char	*ft_var_case(char **result, char *str, int *i, t_env *envp)
 	while (ft_isalnum(str[*i]) || str[*i] == '_')
 		*i = *i + 1;
 	key = ft_substr(str, start, *i - start);
-	val = get_env_value(envp, key);
+	val = get_env_value(shell->env, key);
 	if (val)
 		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
@@ -34,12 +34,12 @@ char	*ft_var_case(char **result, char *str, int *i, t_env *envp)
 	return (return_str);
 }
 
-char	*ft_exit_status_case(char **result, int *i)
+char	*ft_exit_status_case(char **result, int *i, t_shell *shell)
 {
 	char	*return_val;
 	char	*str_exit_status;
 
-	str_exit_status = ft_itoa(g_exit_status);
+	str_exit_status = ft_itoa(shell->exit_status);
 	if (str_exit_status == NULL)
 	{
 		perror("minishell: malloc error");
@@ -75,12 +75,12 @@ char	*ft_normal_case(char chr, char **result, int *i)
 	return (return_val);
 }
 
-char	*ft_home_case(char **result, t_env *envp, int *i)
+char	*ft_home_case(char **result, t_shell *shell, int *i)
 {
 	char	*home;
 	char	*return_val;
 
-	home = get_env_value(envp, "HOME");
+	home = get_env_value(shell->env, "HOME");
 	if (home == NULL)
 		return_val = ft_join_and_free(*result, ft_strdup("~"));
 	else

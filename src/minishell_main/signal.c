@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 13:16:37 by asando            #+#    #+#             */
-/*   Updated: 2026/03/17 19:34:01 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:21:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_sigint_handler_shell(int sig)
 {
 	(void)sig;
-	g_exit_status = 130;
+	*g_exit_status = 130;
 	if (write(STDOUT_FILENO, "\n", 1) < 1)
 		(void)0;
 	rl_on_new_line();
@@ -26,7 +26,7 @@ static void	ft_sigint_handler_shell(int sig)
 static void	ft_sigint_handler_heredoc(int sig)
 {
 	(void)sig;
-	g_exit_status = 130;
+	*g_exit_status = 130;
 	if (write(STDOUT_FILENO, "\n", 1) < 1)
 		(void)0;
 }

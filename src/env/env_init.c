@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 18:09:44 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 18:55:12 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,18 @@ int	ft_shell_init(t_shell *shell, char **envp)
 
 void	ft_shell_destroy(t_shell *shell)
 {
-	ft_clean_struct_env(shell->env);
+	t_env	*tmp;
+	t_env	*to_delete;
+
+	tmp = shell->env;
+	to_delete = tmp;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		free(to_delete->key);
+		free(to_delete->value);
+		free(to_delete);
+		to_delete = tmp;
+	}
 	return ;
 }

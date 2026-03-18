@@ -6,28 +6,28 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/03/16 22:32:28 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:00:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
 
-static char	*ft_expand_dollar(char *str, int *i, t_env *envp, char **result)
+static char	*ft_expand_dollar(char *str, int *i, t_shell *shell, char **result)
 {
 	char	*return_val;
 
 	return_val = NULL;
 	*i = *i + 1;
 	if (str[*i] == '?')
-		return_val = ft_exit_status_case(result, i);
+		return_val = ft_exit_status_case(result, i, shell);
 	else if (ft_isalpha(str[*i] || str[*i] == '_'))
-		return_val = ft_var_case(result, str, i, envp);
+		return_val = ft_var_case(result, str, i, shell);
 	else
 		return_val = ft_join_and_free(*result, ft_strdup("$"));
 	return (return_val);
 }
 
-static char	*ft_expand_value(char *value, t_env *envp)
+static char	*ft_expand_value(char *value, t_shell *shell)
 {
 	char	*result;
 	int		i;
@@ -39,9 +39,9 @@ static char	*ft_expand_value(char *value, t_env *envp)
 	while (value[i] && result)
 	{
 		if (value[i] == '$')
-			result = ft_expand_dollar(value, &i, envp, &result);
+			result = ft_expand_dollar(value, &i, shell, &result);
 		else if (value[i] == '~' && i == 0)
-			result = ft_home_case(&result, envp, &i);
+			result = ft_home_case(&result, shell, &i);
 		else
 			result = ft_normal_case(value[i], &result, &i);
 	}
@@ -51,7 +51,7 @@ static char	*ft_expand_value(char *value, t_env *envp)
 }
 
 // NOTE: Case if is no quote and one quote should be consider
-int	ft_expand_tokens(t_token *tokens, t_env *env)
+int	ft_expand_tokens(t_token *tokens, t_shell *shell)
 {
 	t_token	*head;
 
@@ -60,7 +60,7 @@ int	ft_expand_tokens(t_token *tokens, t_env *env)
 	{
 		if (tokens->type == TOKEN_WORD && tokens->flag_quote == Q_DOUBLE)
 		{
-			tokens->value = ft_expand_value(tokens->value, env);
+			tokens->value = ft_expand_value(tokens->value, shell);
 			if (tokens->value == NULL)
 				return (-1);
 		}

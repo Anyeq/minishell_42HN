@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 18:22:10 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:07:46 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static int	ft_create_tokens(t_token **tokens, t_shell *shell)
 	return (42);
 }
 
-static int	ft_prepare_tokens(t_token **tokens, t_helper *shell)
+static int	ft_prepare_tokens(t_token **tokens, t_shell *shell)
 {
 	int	status;
 
 	status = ft_create_tokens(tokens, shell);
 	if (status != 42)
 		return (status);
-	if (ft_expand_tokens(*tokens, shell->env) == -1)
+	if (ft_expand_tokens(*tokens, shell) == -1)
 	{
 		ft_free_token_list(tokens);
 		return (0);
@@ -72,7 +72,7 @@ static int	ft_prepare_cmd(t_token **tokens, t_cmd **pipeline)
 	return (0);
 }
 
-void	shell_loop(t_helper *shell)
+void	shell_loop(t_shell *shell)
 {
 	t_token	*tokens;
 	int		status;
