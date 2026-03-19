@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 13:53:38 by asando            #+#    #+#             */
-/*   Updated: 2026/03/17 19:23:20 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/19 23:22:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef enum e_flag_error
 
 //lexer_read
 int		ft_read_operator(char *input, int i, t_token **token_list);
-int		ft_read_quote(char *input, int i, t_token **token_list);
 int		ft_read_word(char *input, int i, t_token **token_list);
 
 //lexer_utils
