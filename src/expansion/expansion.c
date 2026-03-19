@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 19:00:27 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 00:08:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*ft_expand_dollar(char *str, int *i, t_shell *shell, char **result)
 	*i = *i + 1;
 	if (str[*i] == '?')
 		return_val = ft_exit_status_case(result, i, shell);
-	else if (ft_isalpha(str[*i] || str[*i] == '_'))
+	else if (ft_isalpha(str[*i]) || str[*i] == '_')
 		return_val = ft_var_case(result, str, i, shell);
 	else
 		return_val = ft_join_and_free(*result, ft_strdup("$"));
@@ -50,7 +50,6 @@ static char	*ft_expand_value(char *value, t_shell *shell)
 	return (result);
 }
 
-// NOTE: Case if is no quote and one quote should be consider
 int	ft_expand_tokens(t_token *tokens, t_shell *shell)
 {
 	t_token	*head;
@@ -58,7 +57,7 @@ int	ft_expand_tokens(t_token *tokens, t_shell *shell)
 	head = tokens;
 	while (tokens)
 	{
-		if (tokens->type == TOKEN_WORD && tokens->flag_quote == Q_DOUBLE)
+		if (tokens->type == TOKEN_WORD && tokens->flag_quote != Q_SINGLE)
 		{
 			tokens->value = ft_expand_value(tokens->value, shell);
 			if (tokens->value == NULL)

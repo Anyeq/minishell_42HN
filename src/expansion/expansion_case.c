@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 19:07:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 00:06:46 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_var_case(char **result, char *str, int *i, t_shell *shell)
 	while (ft_isalnum(str[*i]) || str[*i] == '_')
 		*i = *i + 1;
 	key = ft_substr(str, start, *i - start);
-	val = get_env_value(shell->env, key);
+	val = ft_strdup(get_env_value(shell->env, key));
 	if (val)
 		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
@@ -80,7 +80,7 @@ char	*ft_home_case(char **result, t_shell *shell, int *i)
 	char	*home;
 	char	*return_val;
 
-	home = get_env_value(shell->env, "HOME");
+	home = ft_strdup(get_env_value(shell->env, "HOME"));
 	if (home == NULL)
 		return_val = ft_join_and_free(*result, ft_strdup("~"));
 	else

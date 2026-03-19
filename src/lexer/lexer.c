@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 20:30:04 by asando            #+#    #+#             */
-/*   Updated: 2026/03/17 19:31:03 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/19 22:58:28 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,15 @@ static int	ft_lexer_read(char *input, int i, t_token **token_list)
 		i = ft_read_operator(input, i, token_list);
 		return (i);
 	}
-	if (ft_is_quote(input[i]))
+	i = ft_read_word(input, i, token_list);
+	if (i == -1)
 	{
-		i = ft_read_quote(input, i, token_list);
-		if (i == -1)
-		{
-			ft_lexer_error(ERR_SYNTAX_UNCLOSED);
-			ft_free_token_list(token_list);
-			return (i);
-		}
-		if (i == -2)
-			return (i);
+		ft_lexer_error(ERR_SYNTAX_UNCLOSED);
+		ft_free_token_list(token_list);
 		return (i);
 	}
-	i = ft_read_word(input, i, token_list);
+	if (i == -2)
+		return (i);
 	return (i);
 }
 

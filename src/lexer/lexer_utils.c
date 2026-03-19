@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 14:29:43 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 20:01:36 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/19 22:30:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ int	ft_is_whitespace(char c)
 int	ft_is_operator(char c)
 {
 	if (c == '>' || c == '|' || c == '<')
-		return (42);
-	return (0);
-}
-
-int	ft_is_quote(char c)
-{
-	if (c == '\'' || c == '"')
 		return (42);
 	return (0);
 }

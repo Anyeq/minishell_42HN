@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 19:54:38 by asando            #+#    #+#             */
-/*   Updated: 2026/03/17 19:31:37 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 00:40:47 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	ft_syntax_error(t_token *tokens)
 	res = 0;
 	if (tokens == NULL || tokens->type == TOKEN_PIPE)
 		res = -1;
-	tokens = tokens->next_token;
 	while (tokens && res == 0)
 	{
 		if (tokens->type == TOKEN_PIPE && tokens->next_token == NULL)
