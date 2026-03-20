@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:15:32 by asando            #+#    #+#             */
-/*   Updated: 2026/03/13 11:45:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 00:58:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	**ft_init_pipe(int n_cmd)
 	pipes = ft_allocate_pipes(n_cmd);
 	if (pipes == NULL)
 		return (NULL);
-	while (i < n_cmd)
+	while (i < n_cmd - 1)
 	{
 		if (pipe(pipes[i]) == -1)
 		{

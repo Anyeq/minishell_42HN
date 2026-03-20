@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 13:15:15 by asando            #+#    #+#             */
-/*   Updated: 2026/02/05 14:02:51 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 02:09:09 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_add_arg(t_cmd *cmd, char *value)
 
 	count = 0;
 	i = 0;
-	if (cmd->args)
+	if (cmd->args != NULL)
 	{
 		while (cmd->args[count])
 			count++;
@@ -55,7 +55,7 @@ int	ft_add_arg(t_cmd *cmd, char *value)
 	new_arg = malloc(sizeof(char *) * (count + 2));
 	if (new_arg == NULL)
 		return (-1);
-	while (cmd->args && cmd->args[i])
+	while (cmd->args != NULL && i < count)
 	{
 		new_arg[i] = ft_strdup(cmd->args[i]);
 		i++;

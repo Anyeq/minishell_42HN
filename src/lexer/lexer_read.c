@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:46:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/19 23:22:18 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 08:04:26 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int	ft_read_quote(char *input, t_flag_quote *quote, int i)
 			i++;
 		if (input[i] == '\0')
 			return (-1);
-		i++;
 	}
 	return (i);
 }
@@ -102,5 +101,5 @@ int	ft_read_word(char *input, int i, t_token **token_list)
 		return (-2);
 	}
 	ft_add_token(token_list, new_token);
-	return (i + 1);
+	return (i);
 }
