@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 12:10:52 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 00:08:11 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 08:28:20 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static char	*ft_expand_dollar(char *str, int *i, t_shell *shell, char **result)
 		return_val = ft_exit_status_case(result, i, shell);
 	else if (ft_isalpha(str[*i]) || str[*i] == '_')
 		return_val = ft_var_case(result, str, i, shell);
+	else if (ft_isdigit(str[*i]))
+		return_val = ft_number_case(result, str, i);
 	else
 		return_val = ft_join_and_free(*result, ft_strdup("$"));
 	return (return_val);

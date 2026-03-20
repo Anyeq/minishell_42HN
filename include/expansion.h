@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 15:32:54 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 19:07:06 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 08:27:10 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*ft_normal_case(char chr, char **result, int *i);
 char	*ft_home_case(char **result, t_shell *shell, int *i);
 int		ft_remove_quotes(t_token *tokens);
 char	*ft_join_and_free(char *str1, char *str2);
+char	*ft_number_case(char **result, char *str, int *i);
 
 #endif

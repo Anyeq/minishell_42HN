@@ -6,11 +6,29 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 00:06:46 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 08:28:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
+
+char	*ft_number_case(char **result, char *str, int *i)
+{
+	char	*return_str;
+
+	if (str[*i] == '0')
+	{
+		return_str = ft_join_and_free(*result, ft_strdup("-minishell"));
+		*result = NULL;
+	}
+	else
+	{
+		return_str = ft_join_and_free(*result, ft_strdup(""));
+		*result = NULL;
+	}
+	*i = *i + 1;
+	return (return_str);
+}
 
 char	*ft_var_case(char **result, char *str, int *i, t_shell *shell)
 {
