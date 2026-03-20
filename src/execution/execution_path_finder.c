@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:56:32 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 01:10:02 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 16:04:05 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	ft_access_path(char *path, char **paths)
 	return (0);
 }
 
-//NOTE: think of case not found and doesnt have access
 char	*ft_find_path(char *path)
 {
 	char	*path_env;

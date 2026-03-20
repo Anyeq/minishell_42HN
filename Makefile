@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/20 12:51:16 by asando           ###   ########.fr        #
+#    Updated: 2026/03/20 13:19:34 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,9 +117,9 @@ ARROW := ➜
 #==============================================================================
 NAME := minishell
 
-all: $(NAME)
+all: submodules $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) submodules
+$(NAME): $(OBJS) $(LIBFT)
 	@printf "$(ARROW) compiling minishell... $(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(RDLINEFLAGS) -o $(NAME)
 	@printf "$(GREEN)$(OK)success\n$(RESET)"
@@ -166,9 +166,7 @@ submodules:
 		printf "$(ARROW) initializing mubmodules...\n"; \
 		printf "$(ARROW) cloning libft...\n"; \
 		git submodule update --init --recursive > /dev/null 2>&1; \
-		printf "$(GREEN)$(OK)submodules initialization success$(RESET)"; \
-	else \
-		printf "$(GREEN)$(OK)submodules are already initialized$(RESET)"; \
+		printf "$(GREEN)$(OK)submodules initialization success\n$(RESET)"; \
 	fi
 
 clean:
@@ -176,10 +174,10 @@ clean:
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null 2>&1
 
 fclean: clean
-	@printf "$(ARROW) deleting program..."
+	@printf "$(ARROW) deleting program...\n"
 	@rm -rf $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
-	@printf "$(GREEN)$(OK)success$(RESET)"
+	@printf "$(GREEN)$(OK)success\n$(RESET)"
 
 re:
 	@$(MAKE) fclean

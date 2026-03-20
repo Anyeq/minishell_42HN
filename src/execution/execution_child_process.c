@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 09:25:18 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 15:55:28 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static void	ft_prepare_pipe(int **pipes, int i, t_shell *shell)
 static void	ft_child_process(t_cmd *cmd, int i, t_shell *shell, int **pipes)
 {
 	char	**envp;
+	char	*path;
 
+	path = NULL;
 	ft_prepare_pipe(pipes, i, shell);
 	envp = ft_create_envp(shell->env);
 	if (envp == NULL)
@@ -44,7 +46,13 @@ static void	ft_child_process(t_cmd *cmd, int i, t_shell *shell, int **pipes)
 		ft_exec_builtin(cmd, shell);
 		exit(0);
 	}
-	execve(ft_find_path(cmd->args[0]), cmd->args, envp);
+	path = ft_find_path(cmd->args[0]);
+	if (path == NULL)
+	{
+		printf("%s: command not found\n", cmd->args[0]);
+		exit(127);
+	}
+	execve(path, cmd->args, envp);
 	perror("minishell: execve error");
 	exit(1);
 }
