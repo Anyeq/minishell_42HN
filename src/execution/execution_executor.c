@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_executor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 16:04:06 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 22:35:46 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ static int	ft_init_variable(int *fork_s, int ***pipes, t_shell *shell,
 static int	ft_with_fork(t_shell *shell)
 {
 	t_cmd	*cmd;
+	int		saved_in;
+	int		saved_out;
 
 	cmd = shell->cmds;
 	if (shell->n_cmd == 1 && ft_is_builtin(cmd->args[0]))
 	{
+		saved_in = dup(STDIN_FILENO);
+		saved_out = dup(STDOUT_FILENO);
+		ft_redirection_function(cmd->redirs);
 		ft_exec_builtin(cmd, shell);
+		dup2(saved_in, STDIN_FILENO);
+		dup2(saved_out, STDOUT_FILENO);
+		close(saved_in);
+		close(saved_out);
 		return (0);
 	}
 	return (1);

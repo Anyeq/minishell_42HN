@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_read.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 12:46:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 08:04:26 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 22:35:46 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static t_token_type	ft_read_token_type(char *input, int i)
 	else if (input[i] == '<' && input[i + 1] == '<')
 		return (TOKEN_HEREDOC);
 	else if (input[i] == '>')
-		return (TOKEN_REDIR_IN);
-	else if (input[i] == '<')
 		return (TOKEN_REDIR_OUT);
+	else if (input[i] == '<')
+		return (TOKEN_REDIR_IN);
 	else if (input[i] == '|')
 		return (TOKEN_PIPE);
 	return (TOKEN_WORD);
