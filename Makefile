@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/20 11:49:02 by asando           ###   ########.fr        #
+#    Updated: 2026/03/20 12:51:16 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,18 +101,34 @@ OBJS := $(OBJ_MAIN) $(OBJ_FILE_LEXER) $(OBJ_FILE_PARSE) $(OBJ_FILE_EXPANSION) \
 		$(OBJ_FILE_BUILTIN)
 
 #==============================================================================
+# COLOR AND SYMBOL
+#==============================================================================
+GREEN := \033[1;32m
+RED := \033[1;31m
+BLUE := \033[1;34m
+RESET := \033[0m
+
+OK := ✔
+FAIL := ✖
+ARROW := ➜
+
+#==============================================================================
 # RULES
 #==============================================================================
 NAME := minishell
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) submodules
+	@printf "$(ARROW) compiling minishell... $(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(RDLINEFLAGS) -o $(NAME)
+	@printf "$(GREEN)$(OK)success\n$(RESET)"
 
 $(LIBFT):
-	@$(MAKE) --no-print-directory bonus -C $(LIBFT_DIR)
-	@echo "libft.a is compiled"
+	@printf "$(ARROW) compiling libft... "
+	@$(MAKE) --no-print-directory bonus -C $(LIBFT_DIR) > /dev/null 2>&1
+	@printf "$(GREEN)$(OK)success\n$(RESET)"
+
 
 $(OBJ_MAIN): $(SRC_MAIN) | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -147,21 +163,23 @@ $(OBJ_SUBDIR): | $(OBJ_DIR)
 
 submodules:
 	@if [ ! -f "$(LIBFT_DIR)/Makefile" ]; then \
-		echo "Initializing Submodules..."; \
-		echo "Cloning Libft"; \
-		git submodule update --init --recursive; \
+		printf "$(ARROW) initializing mubmodules...\n"; \
+		printf "$(ARROW) cloning libft...\n"; \
+		git submodule update --init --recursive > /dev/null 2>&1; \
+		printf "$(GREEN)$(OK)submodules initialization success$(RESET)"; \
 	else \
-		echo "Submodules are already initialized."; \
+		printf "$(GREEN)$(OK)submodules are already initialized$(RESET)"; \
 	fi
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) clean -C $(LIBFT_DIR)
+	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null 2>&1
 
 fclean: clean
-	@echo "Program deleted"
+	@printf "$(ARROW) deleting program..."
 	@rm -rf $(NAME)
-	@$(MAKE) fclean -C $(LIBFT_DIR)
+	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
+	@printf "$(GREEN)$(OK)success$(RESET)"
 
 re:
 	@$(MAKE) fclean
