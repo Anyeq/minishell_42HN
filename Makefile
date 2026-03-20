@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/17 21:31:07 by asando           ###   ########.fr        #
+#    Updated: 2026/03/20 11:49:02 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC_FILE_MINISHELL_MAIN := $(addprefix $(SRC_MINISHELL_MAIN_DIR)/, \
 FILE_ENV := env.c env_convert_str.c env_init.c env_utils.c
 SRC_FILE_ENV := $(addprefix $(SRC_ENV_DIR)/, $(FILE_ENV))
 
-FILE_BUILTIN := builtin.c cd.c echo.c env.c export.c pwd.c unset.c
+FILE_BUILTIN := builtin.c cd.c echo.c env.c export.c pwd.c unset.c exit.c
 SRC_FILE_BUILTIN := $(addprefix $(SRC_BUILTIN_DIR)/, $(FILE_BUILTIN))
 
 SRC_MAIN := $(SRC_DIR)/main.c
