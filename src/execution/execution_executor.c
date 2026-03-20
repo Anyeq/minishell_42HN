@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 00:45:43 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 09:36:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,26 @@ static int	ft_init_variable(int *fork_s, int ***pipes, t_shell *shell,
 	return (0);
 }
 
+static int	ft_with_fork(t_shell *shell)
+{
+	t_cmd	*cmd;
+
+	cmd = shell->cmds;
+	if (shell->n_cmd == 1 && ft_is_builtin(cmd->args[0]))
+	{
+		ft_exec_builtin(cmd, shell);
+		return (0);
+	}
+	return (1);
+}
+
 void	ft_executor(t_shell *shell)
 {
 	int		**pipes;
 	pid_t	*pids;
 	int		fork_status;
 
+	fork_status = 1;
 	shell->n_cmd = ft_cmd_count(shell->cmds);
 	if (ft_init_variable(&fork_status, &pipes, shell, &pids) == -1)
 		return ;
@@ -52,7 +66,8 @@ void	ft_executor(t_shell *shell)
 			return ;
 		}
 	}
-	fork_status = ft_create_child_process(shell, pids, pipes);
+	if (ft_with_fork(shell))
+		fork_status = ft_create_child_process(shell, pids, pipes);
 	if (fork_status == 0)
 		ft_parent_process(shell, pipes, pids, shell->n_cmd);
 	ft_clean_pipe_allocation(shell->n_cmd - 1, pipes);

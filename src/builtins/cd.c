@@ -6,17 +6,15 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:07:57 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/17 20:41:14 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 09:01:22 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-//TODO: change add_env_node with the new function
 static void	set_env_value(t_shell *shell, char *key, char *value)
 {
 	t_env	*env;
-	//t_env	*new_node;
 
 	env = shell->env;
 	while (env)
@@ -29,10 +27,6 @@ static void	set_env_value(t_shell *shell, char *key, char *value)
 		}
 		env = env->next;
 	}
-	//new_node = ft_env_new(key, value);
-	//if (new_node == NULL)
-	//	return ;
-	//ft_add_env(&shell->env, new_node);
 	add_env_node(&shell->env, create_env_node(ft_strdup(key), value));
 }
 
