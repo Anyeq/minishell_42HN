@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 21:40:35 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/18 19:49:18 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 11:41:24 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_exec_builtin(t_cmd *cmd, t_shell *shell)
 		return (builtin_unset(cmd, shell));
 	if (ft_strncmp(cmd->args[0], "env", 4) == 0)
 		return (builtin_env(shell));
-	//if (ft_strncmp(cmd->args[0], "exit", 5) == 0)
-	//	return (builtin_exit(cmd, shell));
+	if (ft_strncmp(cmd->args[0], "exit", 5) == 0)
+		return (builtin_exit(cmd, shell));
 	return (1);
 }

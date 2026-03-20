@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 18:50:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/19 22:57:34 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 11:40:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,53 +77,26 @@ static int	export_var(t_shell *shell, char *arg)
 	return (0);
 }
 
-static int	ft_invalid_identifier(char *str)
-{
-	int	ret;
-
-	ret = 0;
-	if (!is_valid_identifier(str))
-	{
-		ft_putstr_fd("minishell: export: `", 2);
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd("': not a valid identifier", 2);
-		ret = 1;
-	}
-	return (ret);
-}
-
 int	builtin_export(t_cmd *cmd, t_shell *shell)
 {
 	int		i;
 	int		ret;
-	char	*eq;
-	char	*key;
 
-	eq = NULL;
-	key = NULL;
 	ret = 0;
 	i = 1;
-
 	if (!cmd->args[1])
 		return (builtin_env(shell));
 	while (cmd->args[i])
 	{
-		eq = ft_strchr(cmd->args[i], '=');
-		if (eq)
+		if (!is_valid_identifier(cmd->args[i]))
 		{
-			key = ft_substr(cmd->args[i], 0, eq - cmd->args[i]);
-			if (ft_invalid_identifier(key))
-				ret = 1;
-			else
-				ret = export_var(shell, cmd->args[i]);
+			ft_putstr_fd("minishell: export: `", 2);
+			ft_putstr_fd(cmd->args[i], 2);
+			ft_putendl_fd("': not a valid identifier", 2);
+			ret = 1;
 		}
 		else
-		{
-			if (ft_invalid_identifier(cmd->args[i]))
-				ret = 1;
-			else
-				ret = export_var(shell, cmd->args[i]);
-		}
+			ret = export_var(shell, cmd->args[i]);
 		i++;
 	}
 	return (ret);
