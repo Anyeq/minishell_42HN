@@ -10,8 +10,8 @@
 
 The project covers:
 - **Lexical analysis** — tokenizing raw input into meaningful units (words, operators, redirections)
-- **Parsing** — building an internal command structure from tokens
 - **Variable expansion** — resolving `$VAR`, `$?`, and handling single/double quotes
+- **Parsing** — building an internal command structure from tokens
 - **Execution** — running commands via `execve`, managing pipes, redirections, and heredocs
 - **Built-in commands** — native implementations that do not spawn child processes
 - **Signal handling** — proper `ctrl-C`, `ctrl-D`, and `ctrl-\` behavior in interactive mode
@@ -34,7 +34,7 @@ The project covers:
 | **Signals** | `ctrl-C` → new prompt · `ctrl-D` → exit · `ctrl-\` → ignored |
 | **Built-ins** | `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit` |
 | **Memory management** | All heap allocations are properly freed (readline leaks excepted) |
-| **One global variable** | Only `g_signal_received` (stores signal number only) |
+| **One global variable** | Only `g_exit_status` (stores exit number only) |
 
 ### Built-in Commands
 
@@ -188,7 +188,7 @@ minishell$ exit 0
 
 AI (GitHub Copilot / ChatGPT) was used during this project in the following ways:
 
-- **Documentation & research assistance** — Clarifying the behavior of specific system calls (`waitpid`, `sigaction`, `dup2`) and Bash edge cases (e.g., quote nesting, `$?` in subexpressions)
+- **Documentation & research assistance** — Clarifying the behavior of specific system calls (`waitpid`, `dup2`) and Bash edge cases (e.g., quote nesting, `$?` in subexpressions)
 - **Debugging support** — Describing symptoms and asking for potential causes of memory leaks, double-free errors, and signal race conditions
 - **README drafting** — Generating the initial structure and wording of this file, reviewed and adjusted by the authors
 - **Code review suggestions** — Asking for feedback on specific functions for readability and correctness; all suggestions were manually reviewed, tested, and understood before being applied
