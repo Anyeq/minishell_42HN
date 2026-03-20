@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_path_finder.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 15:56:32 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 16:04:05 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 21:30:42 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_access_path(char *path, char **paths)
 	return (0);
 }
 
-char	*ft_find_path(char *path)
+char	*ft_find_path(char *path, t_env *env)
 {
 	char	*path_env;
 	char	**paths;
@@ -64,7 +64,7 @@ char	*ft_find_path(char *path)
 	i = 0;
 	if (ft_strchr(path, '/'))
 		return (ft_strdup(path));
-	path_env = getenv("PATH");
+	path_env = get_env_value(env, "PATH");
 	if (path_env == NULL)
 		return (NULL);
 	paths = ft_split(path_env, ':');

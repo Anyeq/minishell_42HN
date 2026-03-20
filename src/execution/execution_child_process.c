@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_child_process.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 15:55:28 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 21:30:39 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_child_process(t_cmd *cmd, int i, t_shell *shell, int **pipes)
 		ft_exec_builtin(cmd, shell);
 		exit(0);
 	}
-	path = ft_find_path(cmd->args[0]);
+	path = ft_find_path(cmd->args[0], shell->env);
 	if (path == NULL)
 	{
 		printf("%s: command not found\n", cmd->args[0]);

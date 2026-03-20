@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 19:11:21 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 18:42:01 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/20 21:30:47 by eynaksho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_redirection_function(t_redir *redirs);
 int		ft_prepare_heredoc(t_cmd *pipeline);
 
 // Path finder purposed function (execution_heredoc.c)
-char	*ft_find_path(char *path);
+char	*ft_find_path(char *path, t_env *env);
 
 // Parent process function (execution_parent_process.c)
 void	ft_parent_process(t_shell *shell, int **pipes, pid_t *pids, int n_cmd);

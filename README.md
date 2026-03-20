@@ -55,17 +55,59 @@ The project covers:
 ```
 minishell/
 ├── include/
-│   └── minishell.h          # All structs, enums, and prototypes
+│   ├── minishell.h          # Core structs, enums, and shared prototypes
+│   ├── builtin.h            # Built-in command prototypes
+│   ├── env.h                # Environment management prototypes
+│   ├── execution.h          # Execution prototypes
+│   ├── expansion.h          # Expansion prototypes
+│   ├── lexer.h              # Lexer/tokenizer prototypes
+│   ├── parse.h              # Parser prototypes
+│   └── signalmnshell.h      # Signal handler prototypes
 ├── src/
-│   ├── main.c               # Entry point, main loop, input processing
-│   ├── signals.c            # Signal handlers (interactive / exec mode)
+│   ├── main.c               # Entry point
+│   ├── minishell_main/
+│   │   ├── main_loop.c      # Main input loop
+│   │   └── signal.c         # Signal handlers (interactive / exec mode)
 │   ├── lexer/               # Tokenizer: splits input into tokens
-│   ├── parser/              # Builds t_cmd list from token stream
-│   ├── expand/              # Variable expansion and quote removal
-│   ├── exec/                # Command execution, pipes, redirections, heredoc
+│   │   ├── lexer.c
+│   │   ├── lexer_read.c
+│   │   ├── lexer_tokenizer.c
+│   │   └── lexer_utils.c
+│   ├── parse/               # Builds t_cmd list from token stream
+│   │   ├── parse.c
+│   │   ├── parse_cmd.c
+│   │   ├── parse_free_function.c
+│   │   └── parse_utils.c
+│   ├── expansion/           # Variable expansion and quote removal
+│   │   ├── expansion.c
+│   │   ├── expansion_case.c
+│   │   ├── expansion_handle_quotes.c
+│   │   └── expansion_utils.c
+│   ├── execution/           # Command execution, pipes, redirections, heredoc
+│   │   ├── execution_executor.c
+│   │   ├── execution_child_process.c
+│   │   ├── execution_parent_process.c
+│   │   ├── execution_pipe.c
+│   │   ├── execution_redirection.c
+│   │   ├── execution_heredoc.c
+│   │   ├── execution_path_finder.c
+│   │   └── execution_process_utils.c
 │   ├── builtins/            # Built-in command implementations
+│   │   ├── builtin.c
+│   │   ├── echo.c
+│   │   ├── cd.c
+│   │   ├── pwd.c
+│   │   ├── export.c
+│   │   ├── unset.c
+│   │   ├── env.c
+│   │   └── exit.c
 │   └── env/                 # Environment linked-list management
-├── libft/                   # Custom C standard library
+│       ├── env.c
+│       ├── env_init.c
+│       ├── env_convert_str.c
+│       └── env_utils.c
+├── lib/
+│   └── libft/               # Custom C standard library
 └── Makefile
 ```
 
