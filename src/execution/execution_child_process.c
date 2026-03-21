@@ -6,11 +6,21 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 19:05:48 by asando            #+#    #+#             */
-/*   Updated: 2026/03/21 19:29:34 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 22:41:41 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+
+static void	ft_clean_exit(t_cmd *cmd, int exit_code, char ***envp, char *path)
+{
+	if (envp)
+		ft_clean_env_allocation(envp, 0, 1);
+	if (path)
+		free(path);
+	ft_free_cmd(cmd);
+	exit(exit_code);
+}
 
 static void	ft_prepare_pipe(int **pipes, int i, t_shell *shell)
 {
@@ -34,27 +44,29 @@ static void	ft_child_process(t_cmd *cmd, int i, t_shell *shell, int **pipes)
 {
 	char	**envp;
 	char	*path;
+	int		status;
 
 	path = NULL;
+	status = 0;
 	ft_prepare_pipe(pipes, i, shell);
 	envp = ft_create_envp(shell->env);
 	if (envp == NULL)
-		exit(1);
+		ft_clean_exit(cmd, 1, NULL, NULL);
 	ft_redirection_function(cmd->redirs);
 	if (ft_is_builtin(cmd->args[0]))
 	{
-		ft_exec_builtin(cmd, shell);
-		exit(0);
+		status = ft_exec_builtin(cmd, shell);
+		ft_clean_exit(cmd, status, &envp, NULL);
 	}
 	path = ft_find_path(cmd->args[0], shell->env);
 	if (path == NULL)
 	{
 		printf("%s: command not found\n", cmd->args[0]);
-		exit(127);
+		ft_clean_exit(cmd, 127, &envp, NULL);
 	}
 	execve(path, cmd->args, envp);
 	perror("minishell: execve error");
-	exit(1);
+	ft_clean_exit(cmd, 1, &envp, path);
 }
 
 static void	ft_child_process_failed(t_shell *shell, int **pipes, int *pids,

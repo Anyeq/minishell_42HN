@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:34:05 by asando            #+#    #+#             */
-/*   Updated: 2026/02/01 17:02:25 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 22:41:34 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_free_redirs(t_redir **redirs)
 	while (tmp)
 	{
 		tmp = tmp->next_redir;
+		free(to_del->filename);
 		free(to_del);
 		to_del = tmp;
 	}

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 08:22:59 by asando            #+#    #+#             */
-/*   Updated: 2026/03/17 20:34:38 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 22:15:05 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,21 @@ static int	ft_env_size(t_env *env)
 	return (count);
 }
 
-static	void	ft_clean_env_allocation(char ***envp, int i)
+void	ft_clean_env_allocation(char ***envp, int i, int clean_all)
 {
+	int	j;
+
+	j = 0;
+	if (clean_all == 1)
+	{
+		while ((*envp)[j])
+		{
+			free((*envp)[j]);
+			j++;
+		}
+		free(*envp);
+		return ;
+	}
 	while (--i >= 0)
 		free((*envp)[i]);
 	free(*envp);
@@ -58,7 +71,7 @@ static int	ft_arrange_str(char ***envp, t_env *env, int i)
 		(*envp)[i] = ft_strjoin3(env->key, "=", env->value);
 		if ((*envp)[i] == NULL)
 		{
-			ft_clean_env_allocation(envp, i);
+			ft_clean_env_allocation(envp, i, 0);
 			perror("minishell: malloc error");
 			return (-1);
 		}
@@ -68,7 +81,7 @@ static int	ft_arrange_str(char ***envp, t_env *env, int i)
 		(*envp)[i] = ft_strdup(env->key);
 		if ((*envp)[i] == NULL)
 		{
-			ft_clean_env_allocation(envp, i);
+			ft_clean_env_allocation(envp, i, 0);
 			perror("minishell: malloc error");
 			return (-1);
 		}

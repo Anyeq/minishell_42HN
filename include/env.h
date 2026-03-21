@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:01:19 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/21 20:47:54 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 22:09:20 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	add_env_node(t_env **head, t_env *new_node);
 void	free_env_list(t_env *head);
 char	*get_env_value(t_env *envp, char *key);
 char	**ft_create_envp(t_env *env);
+void	ft_clean_env_allocation(char ***envp, int i, int clean_all);
 t_env	*ft_init_env(char **envp);
 t_env	*ft_env_new(const char *key, const char *value);
 void	ft_add_env(t_env **env, t_env *new_node);
