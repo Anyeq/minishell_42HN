@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:39:22 by asando            #+#    #+#             */
-/*   Updated: 2026/03/18 19:07:46 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 20:49:39 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	shell_loop(t_shell *shell)
 	int		status;
 
 	ft_setup_signals_shell();
-	while (1)
+	while (!shell->should_exit)
 	{
 		status = ft_prepare_tokens(&tokens, shell);
 		if (status == 0)

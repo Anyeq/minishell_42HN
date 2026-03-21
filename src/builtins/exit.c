@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/20 11:46:01 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 11:49:04 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 20:49:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,16 @@ int	builtin_exit(t_cmd *cmd, t_shell *shell)
 
 	ft_putendl_fd("exit", 1);
 	if (!cmd->args[1])
-		exit(shell->exit_status);
+	{
+		shell->should_exit = 1;
+		return (0);
+	}
 	if (!is_numeric(cmd->args[1]) || check_overflow(cmd->args[1]))
 	{
 		print_exit_error(cmd->args[1]);
-		exit(2);
+		shell->should_exit = 1;
+		shell->exit_status = 2;
+		return (2);
 	}
 	if (cmd->args[2])
 	{
@@ -102,5 +107,7 @@ int	builtin_exit(t_cmd *cmd, t_shell *shell)
 		return (1);
 	}
 	exit_code = ft_atoll(cmd->args[1]);
-	exit((unsigned char)exit_code);
+	shell->should_exit = 1;
+	shell->exit_status = (unsigned char)exit_code;
+	return (0);
 }

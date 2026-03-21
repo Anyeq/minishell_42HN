@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 11:09:17 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 08:28:21 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/21 18:55:09 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,18 @@ char	*ft_var_case(char **result, char *str, int *i, t_shell *shell)
 	char	*val;
 	char	*return_str;
 	int		start;
+	char	*env_var;
 
 	start = *i;
 	return_str = NULL;
 	while (ft_isalnum(str[*i]) || str[*i] == '_')
 		*i = *i + 1;
 	key = ft_substr(str, start, *i - start);
-	val = ft_strdup(get_env_value(shell->env, key));
+	env_var = get_env_value(shell->env, key);
+	if (env_var == NULL)
+		val = NULL;
+	else
+		val = ft_strdup(env_var);
 	if (val)
 		return_str = ft_join_and_free(*result, ft_strdup(val));
 	else if (val == NULL)
