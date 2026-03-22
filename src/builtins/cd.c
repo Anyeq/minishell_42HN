@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:07:57 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/22 15:25:19 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:56:40 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ int	builtin_cd(t_cmd *cmd, t_shell *shell)
 {
 	char	*path;
 	char	*oldpwd;
+	int		ret;
 
 	oldpwd = getcwd(NULL, 0);
 	if (!cmd->args[1])
 	{
-		go_home(shell, oldpwd);
+		ret = go_home(shell, oldpwd);
 		free(oldpwd);
-		return (0);
+		return (ret);
 	}
 	path = cmd->args[1];
 	if (chdir(path) < 0)

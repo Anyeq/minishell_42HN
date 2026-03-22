@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 19:10:55 by asando            #+#    #+#             */
-/*   Updated: 2026/03/21 19:04:35 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:56:10 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	ft_with_fork(t_shell *shell)
 		saved_in = dup(STDIN_FILENO);
 		saved_out = dup(STDOUT_FILENO);
 		ft_redirection_function(cmd->redirs);
-		ft_exec_builtin(cmd, shell);
+		shell->exit_status = ft_exec_builtin(cmd, shell);
 		dup2(saved_in, STDIN_FILENO);
 		dup2(saved_out, STDOUT_FILENO);
 		close(saved_in);
