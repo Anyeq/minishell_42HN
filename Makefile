@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 21:21:03 by asando            #+#    #+#              #
-#    Updated: 2026/03/20 13:19:34 by asando           ###   ########.fr        #
+#    Updated: 2026/03/22 15:09:35 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -180,7 +180,7 @@ fclean: clean
 	@printf "$(GREEN)$(OK)success\n$(RESET)"
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@$(MAKE) fclean > /dev/null 2>&1
+	@$(MAKE) all > /dev/null 2>&1
 
 .PHONY: all clean fclean re submodules

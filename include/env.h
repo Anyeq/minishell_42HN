@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:01:19 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/21 22:09:20 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:29:02 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include "stdlib.h"
 # include "parse.h"
+# include <readline/readline.h>
 
 typedef struct s_env
 {

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 19:26:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 13:05:04 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:20:32 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ int	main(int argc, char **argv, char **envp)
 	g_exit_status = &(shell.exit_status);
 	shell_loop(&shell);
 	ft_shell_destroy(&shell);
-	return (0);
+	return (shell.exit_status);
 }

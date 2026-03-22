@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:07:57 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/22 14:36:35 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:25:19 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	update_pwd(t_shell *shell, char *oldpwd)
 	set_env_value(shell, "OLDPWD", oldpwd);
 	cwd = getcwd(NULL, 0);
 	set_env_value(shell, "PWD", cwd);
+	free(cwd);
 }
 
 static int	go_home(t_shell *shell, char *oldpwd)

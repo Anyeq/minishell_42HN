@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 18:50:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/22 14:46:55 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:19:57 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	set_env_var(t_shell *shell, char *key, char *value)
 		if (ft_strncmp(env->key, key, ft_strlen(key) + 1) == 0)
 		{
 			free(env->value);
-			env->value = value;
+			env->value = ft_strdup(value);
 			return ;
 		}
 		env = env->next;

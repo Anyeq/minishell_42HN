@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:28:50 by asando            #+#    #+#             */
-/*   Updated: 2026/03/21 20:48:33 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 15:28:22 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ void	ft_shell_destroy(t_shell *shell)
 		free(to_delete);
 		to_delete = tmp;
 	}
+	rl_clear_history();
 	return ;
 }
