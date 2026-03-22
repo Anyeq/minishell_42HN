@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 18:50:20 by asando            #+#    #+#             */
-/*   Updated: 2026/03/20 11:40:58 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 14:46:55 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	set_env_var(t_shell *shell, char *key, char *value)
 		}
 		env = env->next;
 	}
-	add_env_node(&shell->env, create_env_node(ft_strdup(key), value));
+	ft_add_env(&shell->env, ft_env_new(key, value));
 }
 
 static int	export_var(t_shell *shell, char *arg)
@@ -58,11 +58,10 @@ static int	export_var(t_shell *shell, char *arg)
 	if (eq)
 	{
 		key = ft_substr(arg, 0, eq - arg);
-		value = ft_strdup(eq + 1);
+		value = eq + 1;
 		if (!is_valid_identifier(key))
 		{
 			free(key);
-			free(value);
 			return (1);
 		}
 		set_env_var(shell, key, value);

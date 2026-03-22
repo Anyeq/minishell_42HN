@@ -6,7 +6,7 @@
 /*   By: eynaksho <eynaksho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 17:07:57 by eynaksho          #+#    #+#             */
-/*   Updated: 2026/03/20 09:01:22 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 14:36:35 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static void	set_env_value(t_shell *shell, char *key, char *value)
 		if (ft_strncmp(env->key, key, ft_strlen(key) + 1) == 0)
 		{
 			free(env->value);
-			env->value = value;
+			env->value = ft_strdup(value);
 			return ;
 		}
 		env = env->next;
 	}
-	add_env_node(&shell->env, create_env_node(ft_strdup(key), value));
+	ft_add_env(&shell->env, ft_env_new(key, value));
 }
 
 static void	update_pwd(t_shell *shell, char *oldpwd)
 {
 	char	*cwd;
 
-	set_env_value(shell, "OLDPWD", ft_strdup(oldpwd));
+	set_env_value(shell, "OLDPWD", oldpwd);
 	cwd = getcwd(NULL, 0);
 	set_env_value(shell, "PWD", cwd);
 }

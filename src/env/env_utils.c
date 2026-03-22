@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 11:32:23 by asando            #+#    #+#             */
-/*   Updated: 2026/03/21 20:52:16 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/22 14:32:23 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_add_env(t_env **env, t_env *new_node)
 	t_env	*tmp;
 
 	tmp = *env;
-	if (env == NULL)
+	if (env == NULL || new_node == NULL)
 		return ;
 	if (*env == NULL)
 	{
