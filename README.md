@@ -117,11 +117,11 @@ minishell/
 Input string
     │
     ▼
-[Lexer]  →  token list  →  [Parser]  →  t_cmd list
-                                              │
-                                     [Expander] (vars + quotes)
-                                              │
-                                     [Executor] (exec / pipe / redir)
+[Lexer]  →  token list  → [Expander] (vars + quotes) 
+									|
+						[Parser]  →  t_cmd list
+									|
+                        [Executor] (exec / pipe / redir)
 ```
 
 ---
